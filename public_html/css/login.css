@@ -1,0 +1,94 @@
+:root {
+    --clr-primary-400: #E83F31;
+    --clr-neutral-100: #FFFFFF;
+    --clr-neutral-200: #cacaca;
+    --clr-neutral-300: #808080;
+    --clr-neutral-700: #1f1f1f;
+    --clr-neutral-800: #0F0F0F;
+    --clr-neutral-900: #000000;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    color: var(--clr-neutral-200);
+    font-size: 5rem;
+    margin: 0;
+}
+
+form {      
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 50%;
+    justify-content: center;
+    max-width: 500px;
+}
+
+input {
+    margin-bottom: 20px;
+    width: 100%;
+    height: 40px;
+    border-radius: 20px;
+    outline: none;
+    font-size: 1rem;
+}
+
+input::placeholder {
+    font-size: 1rem;
+}
+
+input[type=text], input[type=password] {
+    background-color: var(--clr-neutral-700);
+    color: var(--clr-neutral-200);
+    border: 2px solid var(--clr-neutral-700);
+    padding-left: 10px;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+    border: 2px solid var(--clr-neutral-300);
+}
+
+input[type=button], input[type=submit] {
+    background-color: var(--clr-neutral-200);
+    color: var(--clr-neutral-800);
+    width: calc(50% - 10px);
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+input[id=signin] {
+    margin-left: 20px;
+}
+
+input[type=button]:focus, input[type=button]:hover,
+input[type=submit]:focus, input[type=submit]:hover {
+    background-color: var(--clr-neutral-100);
+}
+
+body {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--clr-neutral-800);
+    color: var(--clr-neutral-100);
+    font-family: Arial, Helvetica, sans-serif;
+}

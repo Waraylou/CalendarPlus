@@ -1,0 +1,110 @@
+:root {
+    --clr-neutral-100: #FFFFFF;
+    --clr-neutral-300: #808080;
+    --clr-neutral-700: #1f1f1f;
+    --clr-neutral-800: #0F0F0F;
+    --clr-neutral-900: #000000;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+.main {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.topbar {
+    height: 4rem;
+    border-bottom: 1px solid var(--clr-neutral-700);
+    width: 100vw;
+    padding-left: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    margin-right: 150px;
+}
+
+.weekdays {
+    display: flex;
+    flex-basis: 100%;
+    flex-direction: row;
+    margin-left: 20rem;
+    height: 2rem;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: 100%;
+    flex-direction: row;
+    margin-left: 20rem;
+    /*margin-top: 4rem;*/
+    /*border: 1px solid var(--clr-primary-400); */
+    height: calc(100vh - 6rem);
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-basis: 100%;
+}
+
+.day {
+    display: flex;
+    flex-direction: column;
+    flex-basis: calc((100% * (1/7)));
+    max-width: calc((100% * (1/7)));
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid var(--clr-neutral-700); 
+}
+
+.cell {
+    display: flex;
+    flex-direction: column;
+    flex-basis: calc((100% * (1/7)));
+    max-width: calc((100% * (1/7)));
+    text-align: center;
+    align-items: center;
+    border: 1px solid var(--clr-neutral-700); 
+    border-right: 0;
+    border-top: 0;
+    padding-top: 0.5rem;
+}
+
+.date {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+.date div:hover:not(.selected) {
+    background-color: var(--clr-primary-400);
+    cursor: pointer;
+}
+
+.prev-month,
+.next-month {
+    color: var(--clr-neutral-300);
+}
+
+.selected {
+    background-color: var(--clr-primary-400);
+}
+
+body {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--clr-neutral-800);
+    color: var(--clr-neutral-100);
+    font-family: Arial, Helvetica, sans-serif;
+}

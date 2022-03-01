@@ -1,7 +1,7 @@
 :root {
     --clr-neutral-100: #FFFFFF;
-    --clr-neutral-200: #cacaca;
     --clr-neutral-300: #808080;
+    --clr-neutral-600: #353535;
     --clr-neutral-700: #1f1f1f;
     --clr-neutral-800: #0F0F0F;
     --clr-neutral-900: #000000;
@@ -11,29 +11,32 @@
     box-sizing: border-box;
 }
 
-.main {
+.sidebar-left {
     display: flex;
+    width: 20rem;
+    height: calc(100vh - 4rem);
     flex-direction: column;
+    position: fixed;
+    padding: 1rem 1rem;
+    margin-top: 4rem;
+}
+
+button[id=create] {
+    margin-bottom: 20px;
     width: 100%;
-    height: 100vh;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    color: var(--clr-neutral-100);
+    background-color: var(--clr-neutral-700);
 }
 
-.logo {
-    color: var(--clr-neutral-200);
-    font-size: 5rem;
-    margin: 0;
-}
-
-form {      
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    width: 50%;
-    justify-content: center;
-    max-width: 500px;
+button[id=create]:focus, button[id=create]:hover {
+    background-color: var(--clr-neutral-600);
 }
 
 input {
@@ -61,8 +64,8 @@ input[type=text]:focus, input[type=password]:focus {
 }
 
 input[type=button], input[type=submit] {
-    background-color: var(--clr-neutral-200);
-    color: var(--clr-neutral-800);
+    background-color: var(--clr-neutral-700);
+    color: var(--clr-neutral-100);
     width: calc(50% - 10px);
     height: 40px;
     border-radius: 20px;
@@ -71,15 +74,16 @@ input[type=button], input[type=submit] {
     cursor: pointer;
     font-weight: bold;
     font-size: 1rem;
+    align-self: flex-end;
 }
 
-input[id=signin] {
+input[id=save] {
     margin-left: 20px;
 }
 
 input[type=button]:focus, input[type=button]:hover,
 input[type=submit]:focus, input[type=submit]:hover {
-    background-color: var(--clr-neutral-100);
+    background-color: var(--clr-neutral-600);
 }
 
 body {

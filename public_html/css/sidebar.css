@@ -1,9 +1,11 @@
 :root {
+    --clr-primary-100: #2196f3;
     --clr-neutral-100: #FFFFFF;
-    --clr-neutral-300: #808080;
-    --clr-neutral-600: #353535;
-    --clr-neutral-700: #1f1f1f;
-    --clr-neutral-800: #0F0F0F;
+	--clr-neutral-200: #cacaca;
+    --clr-neutral-300: #545B5E;
+    --clr-neutral-600: #282B2D;
+    --clr-neutral-700: #17191A;
+    --clr-neutral-800: #0B0C0D;
     --clr-neutral-900: #000000;
 }
 
@@ -39,6 +41,16 @@ button[id=create]:focus, button[id=create]:hover {
     background-color: var(--clr-neutral-600);
 }
 
+form {      
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    max-width: 500px;
+    align-items: flex-start;
+}
+
 input {
     margin-bottom: 20px;
     width: 100%;
@@ -52,29 +64,27 @@ input::placeholder {
     font-size: 1rem;
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=datetime-local] {
     background-color: var(--clr-neutral-700);
     color: var(--clr-neutral-200);
     border: 2px solid var(--clr-neutral-700);
     padding-left: 10px;
 }
 
-input[type=text]:focus, input[type=password]:focus {
+input[type=text]:focus, input[type=password]:focus, input[type=datetime-local]:focus {
     border: 2px solid var(--clr-neutral-300);
 }
 
 input[type=button], input[type=submit] {
     background-color: var(--clr-neutral-700);
-    color: var(--clr-neutral-100);
+    color: var(--clr-neutral-200);
     width: calc(50% - 10px);
     height: 40px;
     border-radius: 20px;
     border: none;
-    outline: none;
     cursor: pointer;
     font-weight: bold;
     font-size: 1rem;
-    align-self: flex-end;
 }
 
 input[id=save] {
@@ -86,12 +96,104 @@ input[type=submit]:focus, input[type=submit]:hover {
     background-color: var(--clr-neutral-600);
 }
 
+/* For Checkbox */
+.allday {
+    display: flex;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    user-select: none;
+    align-items: center;
+    height: 25px;
+    width: 100%;
+}
+
+/* Hide the browser's default checkbox */
+.allday input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    border-radius: 35%;
+    background-color: var(--clr-neutral-700);
+}
+
+.allday input:focus ~ .checkmark {
+    border: 2px solid var(--clr-neutral-300);
+}
+
+/* On mouse-over, add a grey background color */
+.allday:hover input ~ .checkmark {
+    background-color: var(--clr-neutral-600);
+}
+
+/* When the checkbox is checked, add a blue background */
+.allday input:checked ~ .checkmark {
+    background-color: var(--clr-primary-100);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.allday input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.allday .checkmark:after {
+    padding: 0;
+    left: 10px;
+    top: 6px;
+    width: 5px;
+    height: 10px;
+    border: solid var(--clr-neutral-100);
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+textarea {
+    resize: none;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 120px;
+    border-radius: 20px;
+    outline: none;
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--clr-neutral-700);
+    color: var(--clr-neutral-200);
+    border: 2px solid var(--clr-neutral-700);
+    padding-left: 10px;
+    padding-top: 9px;
+}
+
+textarea:focus {
+    border: 2px solid var(--clr-neutral-300);
+}
+
 body {
     margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--clr-neutral-800);
-    color: var(--clr-neutral-100);
+    color: var(--clr-neutral-200);
     font-family: Arial, Helvetica, sans-serif;
 }

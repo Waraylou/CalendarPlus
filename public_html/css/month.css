@@ -1,8 +1,10 @@
 :root {
     --clr-neutral-100: #FFFFFF;
-    --clr-neutral-300: #808080;
-    --clr-neutral-700: #1f1f1f;
-    --clr-neutral-800: #0F0F0F;
+	--clr-neutral-200: #cacaca;
+    --clr-neutral-300: #545B5E;
+    --clr-neutral-600: #282B2D;
+    --clr-neutral-700: #17191A;
+    --clr-neutral-800: #0B0C0D;
     --clr-neutral-900: #000000;
 }
 

@@ -1,9 +1,10 @@
 :root {
     --clr-neutral-100: #FFFFFF;
-    --clr-neutral-200: #cacaca;
-    --clr-neutral-300: #808080;
-    --clr-neutral-700: #1f1f1f;
-    --clr-neutral-800: #0F0F0F;
+	--clr-neutral-200: #cacaca;
+    --clr-neutral-300: #545B5E;
+    --clr-neutral-600: #282B2D;
+    --clr-neutral-700: #17191A;
+    --clr-neutral-800: #0B0C0D;
     --clr-neutral-900: #000000;
 }
 
@@ -49,14 +50,14 @@ input::placeholder {
     font-size: 1rem;
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=email] {
     background-color: var(--clr-neutral-700);
     color: var(--clr-neutral-200);
     border: 2px solid var(--clr-neutral-700);
     padding-left: 10px;
 }
 
-input[type=text]:focus, input[type=password]:focus {
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
     border: 2px solid var(--clr-neutral-300);
 }
 
@@ -67,7 +68,6 @@ input[type=button], input[type=submit] {
     height: 40px;
     border-radius: 20px;
     border: none;
-    outline: none;
     cursor: pointer;
     font-weight: bold;
     font-size: 1rem;

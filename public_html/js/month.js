@@ -1,62 +1,96 @@
-const date = new Date();
+let nav = 0;
+let clicked = null;
+let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : [];
 
-// Function to render dates onto the calendar
-function renderCalendar() {
+const calendar = document.getElementById('calendar');
+const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-    const monthDays = document.querySelector('.grid');
-    // Last day(number) of the month (how many days are in the month)
-    const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-    // Last day(number) of the previous month (how many days in previous month)
-    const prevLastDay = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
-    // Calculates what day the first day of the month is on
-    const firstDayIndex = date.getDay();
-    // Calculates what day the last day of the month is on
-    const lastDayIndex = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDay();
+function load() {
+    const dt = new Date();
+
+    if (nav !== 0) {
+        dt.setMonth(new Date().getMonth() + nav);
+    }
     
-    const nextDays = 7 - lastDayIndex - 1;
-    // List of months
-    const months = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-    ];
-    // Sets the correct month and year on the top of the screen
-    document.querySelector('.topbar h2').innerHTML = months[date.getMonth()] + " " + date.getFullYear();
-    // Initializes days to empty
-    let days = "";
-    // Displays days of the last month that would be visible on the current month's calendar
-    for(let i = firstDayIndex; i > 0; i--) {
-        days += `<div class="cell"><div class="date prev-month">${prevLastDay - i + 1}</div></div>`;
+    const day = dt.getDate();
+    const month = dt.getMonth();
+    const year = dt.getFullYear();
+
+    const firstDayOfMonth = new Date(year, month, 1);
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    const lastDayPrevMonth = new Date(year, month, 0).getDate();
+    const nextPaddingDays = 7 - new Date(year, month + 1, 0).getDay();
+
+    const dateString = firstDayOfMonth.toLocaleDateString('en-us', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+    })
+    const paddingDays = weekdays.indexOf(dateString.split(', ')[0]);
+
+    document.getElementById('monthDisplay').innerText = `${dt.toLocaleDateString('en-us', {month: 'long'})} ${year}`
+
+    clearCalendar();
+
+    for(let i = paddingDays; i > 0; i--) {
+        const daySquare = document.createElement('div');
+        daySquare.classList.add('cell');
+
+        const date = document.createElement('div');
+        date.classList.add('date', 'padding');
+        date.innerText = lastDayPrevMonth - i + 1;
+
+        daySquare.addEventListener('click', () => console.log('click'));
+
+        daySquare.appendChild(date)
+        calendar.appendChild(daySquare);
     }
-    // Displays days of the current month
-    for(let i = 1; i <= lastDay; i++) {
-        days += `<div class="cell"><div class="date">${i}</div></div>`;
-        monthDays.innerHTML = days;
+
+    for (let i = 1; i <= daysInMonth; i++) {
+        const daySquare = document.createElement('div');
+        daySquare.classList.add('cell');
+
+        const date = document.createElement('div');
+        date.classList.add('date');
+        date.innerText = i;
+
+        daySquare.addEventListener('click', () => console.log('click'));
+
+        daySquare.appendChild(date);
+        calendar.appendChild(daySquare);
     }
-    // Displays days of the next month that would be visible on the current month's calendar
-    for(let i = 1; i <= nextDays; i++) {
-        days += `<div class="cell"><div class="date next-month">${i}</div></div>`;
-        monthDays.innerHTML = days;
+
+    for(let i = 1; i < nextPaddingDays; i++) {
+        const daySquare = document.createElement('div');
+        daySquare.classList.add('cell');
+
+        const date = document.createElement('div');
+        date.classList.add('date', 'padding');
+        date.innerText = i;
+
+        daySquare.addEventListener('click', () => console.log('click'));
+
+        daySquare.appendChild(date)
+        calendar.appendChild(daySquare);
     }
 }
-// Changes the calendar to the previous month when the "Prev" button is clicked
-document.querySelector('.prev').addEventListener('click', () => {
-    date.setMonth(date.getMonth() - 1);
-    renderCalendar();
-})
-// Changes the calendar to the next month when the "Next" button is clicked
-document.querySelector('.next').addEventListener('click', () => {
-    date.setMonth(date.getMonth() + 1);
-    renderCalendar();
-})
-// Initializes the calendar (only done once)
-renderCalendar();
+
+function clearCalendar() {
+    calendar.innerHTML = '';
+}
+
+function initButtons() {
+    document.getElementById('nextButton').addEventListener('click', () => {
+        nav++;
+        load();
+    })
+    document.getElementById('prevButton').addEventListener('click', () => {
+        nav--;
+        load();
+    })
+}
+
+initButtons();
+load();

@@ -44,7 +44,7 @@ function load() {
 
         daySquare.addEventListener('click', () => console.log('click'));
 
-        daySquare.appendChild(date)
+        daySquare.appendChild(date);
         calendar.appendChild(daySquare);
     }
 

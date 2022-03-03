@@ -79,6 +79,10 @@ button[id=login] {
     margin-left: 20px;
 }
 
+button[id=back] {
+    margin-right: 20px;
+}
+
 button:hover, button:focus {
     background-color: var(--clr-neutral-100);
 }

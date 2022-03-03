@@ -6,7 +6,7 @@ function initializeMain() {
 }
 
 function initializeCreate() {
-    document.querySelector('.sidebar-left').innerHTML = "<form action=''>" +
+    document.querySelector('.sidebar-left').innerHTML = "<form id='manageEvent' action=''>" +
     "<input type='text' id='title' name='title' placeholder='Title'><br>" +
     "<label for='birthdaytime'>Start Time</label>" +
     "<input type='datetime-local'>" +
@@ -18,12 +18,32 @@ function initializeCreate() {
     "</label>" +
     "<input type='text' id='location' name='location' placeholder='Location'><br>" +
     "<textarea id='description' name='description' placeholder='Description'></textarea>" +
-    "<input type='button' id='back' value='Back'>" +
-    "<input type='submit' id='save' value='Save'>" +
-    "</form>"
+    "</form>" + 
+    "<button type='button' id='back'>Back</button>" +
+    "<button id='save' form='manageEvent'>Save</button>"
     document.querySelector('#back').addEventListener('click', () => {
         initializeMain();
     })
 }
+
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  }
 
 initializeMain();

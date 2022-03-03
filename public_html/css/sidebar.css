@@ -17,38 +17,52 @@
     display: flex;
     width: 20rem;
     height: calc(100vh - 4rem);
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     position: fixed;
     padding: 1rem 1rem;
     margin-top: 4rem;
+    align-items: flex-start;
+}
+
+button {
+    background-color: var(--clr-neutral-700);
+    color: var(--clr-neutral-200);
+    flex-basis: calc(50% - 10px);
+    height: 40px;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    user-select: none;
+}
+
+button:focus, button:hover {
+    background-color: var(--clr-neutral-600);
+}
+
+button[id=back], button[id=save] {
+    align-self: flex-end;
+}
+
+button[id=save] {
+    margin-left: 20px;
 }
 
 button[id=create] {
     margin-bottom: 20px;
-    width: 100%;
-    height: 40px;
-    border-radius: 20px;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1rem;
-    color: var(--clr-neutral-200);
-    background-color: var(--clr-neutral-700);
-}
-
-button[id=create]:focus, button[id=create]:hover {
-    background-color: var(--clr-neutral-600);
+    flex-basis: 100%;
 }
 
 form {      
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    width: 100%;
+    flex-basis: 100%;
     justify-content: center;
     max-width: 500px;
-    align-items: flex-start;
 }
 
 input {
@@ -62,38 +76,18 @@ input {
 
 input::placeholder {
     font-size: 1rem;
+    user-select: none;
 }
 
-input[type=text], input[type=password], input[type=datetime-local] {
+input {
     background-color: var(--clr-neutral-700);
     color: var(--clr-neutral-200);
     border: 2px solid var(--clr-neutral-700);
     padding-left: 10px;
 }
 
-input[type=text]:focus, input[type=password]:focus, input[type=datetime-local]:focus {
+input:focus {
     border: 2px solid var(--clr-neutral-300);
-}
-
-input[type=button], input[type=submit] {
-    background-color: var(--clr-neutral-700);
-    color: var(--clr-neutral-200);
-    width: calc(50% - 10px);
-    height: 40px;
-    border-radius: 20px;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1rem;
-}
-
-input[id=save] {
-    margin-left: 20px;
-}
-
-input[type=button]:focus, input[type=button]:hover,
-input[type=submit]:focus, input[type=submit]:hover {
-    background-color: var(--clr-neutral-600);
 }
 
 /* For Checkbox */

@@ -17,7 +17,7 @@
     box-sizing: border-box;
 }
 
-.sidebar-left {
+.sidebar {
     display: flex;
     width: 20rem;
     height: calc(100vh - 4rem);
@@ -26,7 +26,24 @@
     position: fixed;
     padding: 1rem 1rem;
     margin-top: 4rem;
+}
+
+form[id=manageEvent] {
     align-items: flex-start;
+}
+
+.formFields {
+    flex-basis: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.formButtons {
+    flex-basis: 100%;
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
 }
 
 button {
@@ -46,16 +63,11 @@ button:focus, button:hover {
     background-color: var(--clr-neutral-600);
 }
 
-button[id=back], button[id=save] {
-    align-self: flex-end;
-}
-
 button[id=save] {
     margin-left: 20px;
 }
 
 button[id=create] {
-    margin-bottom: 20px;
     flex-basis: 100%;
 }
 

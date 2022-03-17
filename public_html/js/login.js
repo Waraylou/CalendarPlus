@@ -1,3 +1,5 @@
+
+
 const main = document.getElementById('main');
 
 // Initializes the main container
@@ -138,6 +140,8 @@ function initializeRegistration() {
         if (registrationForm.checkValidity()) {
             // Any code or functions meant to execute if field requirements are met should go here
             console.log('Registration Valid');
+            createAccount();
+            console.log('Registration success');
         }
         else {
             console.log('Registration Not Valid')
@@ -237,6 +241,9 @@ function checkPasswordsMatch() {
         confpass.setCustomValidity('');
     }
 }
+
+
+
 
 initializeMain();
 initializeLogin();

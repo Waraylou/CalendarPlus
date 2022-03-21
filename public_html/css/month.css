@@ -81,11 +81,11 @@ h2[id=monthDisplay] {
 }
 
 .padding {
-    color: var(--clr-neutral-300);
+    color: var(--clr-neutral-250);
 }
 
 .selected {
-    background-color: var(--clr-primary-400);
+    background-color: var(--clr-primary-100);
 }
 
 button[id=logout] {

@@ -10,6 +10,10 @@
     --clr-neutral-900: #000000;
 }
 
+:focus {
+    outline: none;
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -51,7 +55,6 @@ h2[id=monthDisplay] {
 
 .arrow {
     background-color: var(--clr-neutral-700);
-    outline: none; 
     border: none;
     height: 35px;
     width: 35px;

@@ -8,6 +8,10 @@
     --clr-neutral-900: #000000;
 }
 
+:focus {
+    outline: none;
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -44,7 +48,6 @@ input {
     width: 100%;
     height: 40px;
     border-radius: 20px;
-    outline: none;
     font-size: 1rem;
     background-color: var(--clr-neutral-700);
     color: var(--clr-neutral-200);
@@ -53,7 +56,7 @@ input {
 }
 
 input:focus {
-    border: 2px solid var(--clr-neutral-300);
+    outline: 2px solid var(--clr-neutral-300);
 }
 
 input::placeholder {
@@ -67,7 +70,6 @@ button {
     width: calc(50% - 10px);
     height: 40px;
     border-radius: 20px;
-    outline: none;
     border: none;
     cursor: pointer;
     font-weight: bold;

@@ -1,12 +1,4 @@
-:root {
-    --clr-neutral-100: #FFFFFF;
-	--clr-neutral-200: #cacaca;
-    --clr-neutral-300: #545B5E;
-    --clr-neutral-600: #282B2D;
-    --clr-neutral-700: #17191A;
-    --clr-neutral-800: #0B0C0D;
-    --clr-neutral-900: #000000;
-}
+@import "common.css";
 
 :focus {
     outline: none;
@@ -87,14 +79,4 @@ button[id=back] {
 
 button:hover, button:focus {
     background-color: var(--clr-neutral-100);
-}
-
-body {
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--clr-neutral-800);
-    color: var(--clr-neutral-100);
-    font-family: Arial, Helvetica, sans-serif;
 }

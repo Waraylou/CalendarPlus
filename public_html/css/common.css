@@ -1,0 +1,26 @@
+:root {
+    --clr-primary-100: #2196f3;
+    --clr-neutral-100: #FFFFFF;
+	--clr-neutral-200: #cacaca;
+    --clr-neutral-300: #545B5E;
+    --clr-neutral-600: #282B2D;
+    --clr-neutral-700: #17191A;
+    --clr-neutral-800: #0B0C0D;
+    --clr-neutral-900: #000000;
+    --standard-border: 1px solid var(--clr-neutral-700);
+    --input-outline: 2px solid var(--clr-neutral-300);
+}
+
+:focus {
+    outline: none;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--clr-neutral-800);
+    color: var(--clr-neutral-200);
+    font-family: Arial, Helvetica, sans-serif;
+}

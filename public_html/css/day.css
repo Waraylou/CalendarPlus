@@ -2,10 +2,6 @@
 @import "sidebar.css";
 @import "topbar.css";
 
-:focus {
-    outline: none;
-}
-
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -14,11 +10,6 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-}
-
-h2[id=monthDisplay] {
-    text-align: center;
-    flex-basis: 70%;
 }
 
 .weekdays {

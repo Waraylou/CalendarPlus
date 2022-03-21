@@ -2,10 +2,6 @@
 @import "sidebar.css";
 @import "topbar.css";
 
-:focus {
-    outline: none;
-}
-
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -16,17 +12,27 @@
     width: 100%;
 }
 
-h2[id=monthDisplay] {
+.sidebar {
+    outline: var(--standard-border);
+}
+
+h2[id=yearDisplay] {
     text-align: center;
     flex-basis: 70%;
+}
+
+h3 {
+    margin: 0;
 }
 
 .weekdays {
     display: flex;
     flex-basis: 100%;
     flex-direction: row;
-    margin-left: 20rem;
-    height: 2rem;
+}
+
+.day {
+    flex-basis: calc((100% * (1/7)));
 }
 
 .calendar {
@@ -35,16 +41,29 @@ h2[id=monthDisplay] {
     flex-basis: 100%;
     flex-direction: row;
     margin-left: 20rem;
-    height: calc(100vh - 6rem);
+    height: calc(100vh - 4rem);
 }
 
-.row {
+.cell {
     display: flex;
     flex-direction: row;
-    flex-basis: 100%;
+    flex-wrap: wrap;
+    flex-basis: calc((100% * (1/4)));
+    max-width: calc((100% * (1/4)));
+    text-align: center;
+    align-items: center;
+    border-right: 0;
+    border-top: 0;
+    padding: 2rem;
 }
 
-.day {
+.month {
+    display: flex;
+    flex-basis: 100%;
+    justify-content: center;
+}
+
+.date {
     display: flex;
     flex-direction: column;
     flex-basis: calc((100% * (1/7)));
@@ -52,27 +71,6 @@ h2[id=monthDisplay] {
     text-align: center;
     align-items: center;
     justify-content: center;
-    border-left: 1px solid var(--clr-neutral-700); 
-}
-
-.cell {
-    display: flex;
-    flex-direction: column;
-    flex-basis: calc((100% * (1/7)));
-    max-width: calc((100% * (1/7)));
-    text-align: center;
-    align-items: center;
-    border: 1px solid var(--clr-neutral-700); 
-    border-right: 0;
-    border-top: 0;
-    padding-top: 0.5rem;
-}
-
-.date {
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    transition: background-color 0.2s;
 }
 
 .date div:hover:not(.selected) {

@@ -1,8 +1,8 @@
 let nav = 0;
 let clicked = null;
-let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : [];
 
 const calendar = document.getElementById('calendar');
+const currDate = new Date();
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 function load() {
@@ -12,9 +12,9 @@ function load() {
         dt.setMonth(new Date().getMonth() + nav);
     }
     
-    const day = dt.getDate();
-    const month = dt.getMonth();
-    const year = dt.getFullYear();
+    day = dt.getDate();
+    month = dt.getMonth();
+    year = dt.getFullYear();
 
     const firstDayOfMonth = new Date(year, month, 1);
     const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -55,12 +55,18 @@ function load() {
         const date = document.createElement('div');
         date.classList.add('date');
         date.innerText = i;
+        if(i == currDate.getDate()) {
+            date.classList.add('selected');
+        }
 
         daySquare.addEventListener('click', () => console.log('click'));
 
         daySquare.appendChild(date);
         calendar.appendChild(daySquare);
     }
+
+    console.log(day);
+    console.log(currDate.getDate());
 
     for(let i = 1; i < nextPaddingDays; i++) {
         const daySquare = document.createElement('div');
@@ -72,7 +78,7 @@ function load() {
 
         daySquare.addEventListener('click', () => console.log('click'));
 
-        daySquare.appendChild(date)
+        daySquare.appendChild(date);
         calendar.appendChild(daySquare);
     }
 }

@@ -1,19 +1,10 @@
-:root {
-    --clr-primary-100: #2196f3;
-    --clr-neutral-100: #FFFFFF;
-	--clr-neutral-200: #cacaca;
-    --clr-neutral-300: #545B5E;
-    --clr-neutral-600: #282B2D;
-    --clr-neutral-700: #17191A;
-    --clr-neutral-800: #0B0C0D;
-    --clr-neutral-900: #000000;
-}
+@import "common.css";
 
 *, *::before, *::after {
     box-sizing: border-box;
 }
 
-.sidebar-left {
+.sidebar {
     display: flex;
     width: 20rem;
     height: calc(100vh - 4rem);
@@ -22,7 +13,24 @@
     position: fixed;
     padding: 1rem 1rem;
     margin-top: 4rem;
+}
+
+form[id=manageEvent] {
     align-items: flex-start;
+}
+
+.formFields {
+    flex-basis: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.formButtons {
+    flex-basis: 100%;
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
 }
 
 button {
@@ -31,7 +39,6 @@ button {
     flex-basis: calc(50% - 10px);
     height: 40px;
     border-radius: 20px;
-    outline: none;
     border: none;
     cursor: pointer;
     font-weight: bold;
@@ -43,16 +50,11 @@ button:focus, button:hover {
     background-color: var(--clr-neutral-600);
 }
 
-button[id=back], button[id=save] {
-    align-self: flex-end;
-}
-
 button[id=save] {
     margin-left: 20px;
 }
 
 button[id=create] {
-    margin-bottom: 20px;
     flex-basis: 100%;
 }
 
@@ -70,7 +72,6 @@ input {
     width: 100%;
     height: 40px;
     border-radius: 20px;
-    outline: none;
     font-size: 1rem;
 }
 
@@ -87,7 +88,7 @@ input {
 }
 
 input:focus {
-    border: 2px solid var(--clr-neutral-300);
+    outline: 2px solid var(--clr-neutral-300);
 }
 
 /* For Checkbox */
@@ -122,23 +123,29 @@ input:focus {
     width: 25px;
     border-radius: 35%;
     background-color: var(--clr-neutral-700);
-    border: 2px solid var(--clr-neutral-700);
 }
 
 /* On mouse-over, add a grey background color */
 .allday:hover input ~ .checkmark {
     background-color: var(--clr-neutral-600);
-    border: 2px solid var(--clr-neutral-600);
 }
 
 /* When the checkbox is checked, add a blue background */
 .allday input:checked ~ .checkmark {
     background-color: var(--clr-primary-100);
-    border: 2px solid var(--clr-primary-100);
 }
 
 .allday:hover input:checked ~ .checkmark {
-    border: 2px solid var(--clr-neutral-300);
+    outline: var(--input-outline);
+}
+
+.allday:hover input ~ .checkmark {
+    outline: var(--input-outline);
+}
+
+input[type=checkbox]:focus ~ .checkmark,
+input[type=checkbox]:focus:checked ~ .checkmark {
+    outline: var(--input-outline);
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -156,8 +163,8 @@ input:focus {
 /* Style the checkmark/indicator */
 .allday .checkmark:after {
     padding: 0;
-    left: 8px;
-    top: 4px;
+    left: 10px;
+    top: 6px;
     width: 5px;
     height: 10px;
     border: solid var(--clr-neutral-100);
@@ -171,26 +178,15 @@ textarea {
     width: 100%;
     height: 120px;
     border-radius: 20px;
-    outline: none;
     font-size: 1rem;
     font-family: Arial, Helvetica, sans-serif;
     background-color: var(--clr-neutral-700);
     color: var(--clr-neutral-200);
-    border: 2px solid var(--clr-neutral-700);
+    border: none;
     padding-left: 10px;
     padding-top: 9px;
 }
 
 textarea:focus {
-    border: 2px solid var(--clr-neutral-300);
-}
-
-body {
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--clr-neutral-800);
-    color: var(--clr-neutral-200);
-    font-family: Arial, Helvetica, sans-serif;
+    outline: var(--input-outline);
 }

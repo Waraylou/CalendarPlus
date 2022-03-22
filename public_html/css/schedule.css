@@ -16,11 +16,6 @@
     width: 100%;
 }
 
-h2[id=monthDisplay] {
-    text-align: center;
-    flex-basis: 70%;
-}
-
 .weekdays {
     display: flex;
     flex-basis: 100%;
@@ -81,9 +76,9 @@ h2[id=monthDisplay] {
 }
 
 .padding {
-    color: var(--clr-neutral-250);
+    color: var(--clr-neutral-300);
 }
 
 .selected {
-    background-color: var(--clr-primary-100);
+    background-color: var(--clr-primary-400);
 }

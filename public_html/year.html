@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar+</title>
-    <link rel="stylesheet" href="css/month.css">
+    <link rel="stylesheet" href="css/year.css">
     <script src="https://kit.fontawesome.com/ee9ded2cc7.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -14,7 +14,7 @@
             <h1 class="logo">Calendar+</h1>
             <div class="nav">
                 <div class="navButton" id="left"><button type="button" class="arrow" id="prevButton"><i class="fa-solid fa-2x fa-angle-left"></i></button></div>
-                <h2 id="monthDisplay">Month, Year</h2>
+                <h2 id="yearDisplay">2022</h2>
                 <div class="navButton" id="right"><button type="button" class="arrow" id="nextButton"><i class="fa-solid fa-2x fa-angle-right"></i></button></div>
             </div>
             <div class="top-right">
@@ -23,8 +23,8 @@
                     <div id="myDropdown" class="dropdown-content">
                         <button id="day" onclick="window.location.href = 'day.html';">Day</button>
                         <button id="week" onclick="window.location.href = 'week.html';">Week</button>
-                        <button id="month">Month</button>
-                        <button id="year" onclick="window.location.href = 'year.html';">Year</button>
+                        <button id="month" onclick="window.location.href = 'month.html';">Month</button>
+                        <button id="year">Year</button>
                         <button id="schedule" onclick="window.location.href = 'schedule.html';">Schedule</button>
                     </div>
                 </div>
@@ -34,22 +34,11 @@
         <div class="sidebar" id="sidebar">
             
         </div>
-        <div class="weekdays">
-            <div class="row">
-                <div class="day">SUN</div>
-                <div class="day">MON</div>
-                <div class="day">TUE</div>
-                <div class="day">WED</div>
-                <div class="day">THU</div>
-                <div class="day">FRI</div>
-                <div class="day">SAT</div>
-            </div>
-        </div>
         <div class="calendar" id="calendar">
-            
+
         </div>
     </div>
-    <script src="/sidebar.js"></script>
-    <script src="/month.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/year.js"></script>
 </body>
 </html>

@@ -13,6 +13,8 @@ function initializeMain() {
 function initializeLogin() {
     const loginForm = document.createElement('form');
     loginForm.name = 'loginForm';
+    loginForm.method = 'POST'
+    loginForm.action = '/login'
 
     // Username field creation
     const username = document.createElement('input');
@@ -200,7 +202,7 @@ function checkRegistrationInfo() {
 
     form.addEventListener("submit", function(event) {
         // Prevents "Sign Up" button from submitting the form and refreshing the page
-      //  event.preventDefault();
+       //event.preventDefault();
 
         // Gets data from the form
         const formData = new FormData(this);

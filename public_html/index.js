@@ -25,13 +25,17 @@ con.connect(function(err) {
   console.log("CONNECTION MADE WITH SQL SERVER!")
 });
 
-app 
-    .use(express.static('js'))
-    .use(morgan('dev'))
-    .use(bodyParser.urlencoded({extended: false}))
-    .use(bodyParser.json())
+app.use(express.static('js'))
+app.use(morgan('dev'))
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())
    
-    .post("/api/user", async(req,res) => {
+//app.get('/', (req, res) => {
+//  res.sendFile('/public_html/index.html');
+//});
+
+
+app.post("/api/user", (req,res) => {
       var sql = `INSERT INTO users VALUES ('${req.body.username}', '${req.body.password}', '${req.body.email}')`
       con.query(sql, function (err, result) {
         if (err) throw err;
@@ -46,13 +50,13 @@ app
 
 
       });
-     
+      res.end();
     
     })
       
    
  
 
-    .listen(port, () => console.log(`server listening on port ${port}`));
+app.listen(port, () => console.log(`server listening on port ${port}`));
 
 

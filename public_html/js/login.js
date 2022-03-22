@@ -73,7 +73,10 @@ function initializeLogin() {
 function initializeRegistration() {
     const registrationForm = document.createElement('form');
     registrationForm.name = 'registrationForm';
-
+    registrationForm.method = "POST";
+    registrationForm.action = "/api/user";
+    
+    
     // Username field creation
     const username = document.createElement('input');
     username.type = 'text';
@@ -133,6 +136,7 @@ function initializeRegistration() {
 
     // Register / "submit" button creation
     const register = document.createElement('button');
+    register.type = 'submit';
     register.id = 'register';
     register.innerText = 'Sign Up';
     register.addEventListener('click', () => {
@@ -151,7 +155,7 @@ function initializeRegistration() {
     
     main.appendChild(registrationForm);
 
-    checkRegistrationInfo();
+   checkRegistrationInfo();
 }
 
 // Clears all elements from the main container
@@ -165,7 +169,7 @@ function checkLoginInfo() {
 
     form.addEventListener("submit", function(event) {
         // Prevents "Log In" button from submitting the form and refreshing the page
-        event.preventDefault();
+   //     event.preventDefault();
 
         // Gets data from the form
         const formData = new FormData(this);
@@ -196,7 +200,7 @@ function checkRegistrationInfo() {
 
     form.addEventListener("submit", function(event) {
         // Prevents "Sign Up" button from submitting the form and refreshing the page
-        event.preventDefault();
+      //  event.preventDefault();
 
         // Gets data from the form
         const formData = new FormData(this);

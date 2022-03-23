@@ -25,34 +25,32 @@ con.connect(function(err) {
   console.log("CONNECTION MADE WITH SQL SERVER!")
 });
 
-app.use(express.static('js'))
+app.use(express.static(__dirname + '/public_html'))
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
    
-//app.get('/', (req, res) => {
-//  res.sendFile('/public_html/index.html');
-//});
+app.get('/', (req, res) => {
+  res.sendFile('/public_html/index.html');
+});
 
 
 app.post("/api/user", (req,res) => {
-      var sql = `INSERT INTO users VALUES ('${req.body.username}', '${req.body.password}', '${req.body.email}')`
-      con.query(sql, function (err, result) {
-        if (err) throw err;
-        console.log("1 record inserted")
-      });
+  var sql = `INSERT INTO users VALUES ('${req.body.username}', '${req.body.password}', '${req.body.email}')`
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("1 record inserted")
+  });
 
-      con.end(function(err) {
-        if (err) {
-         return console.log('error:' + err.message);
-       }
-       console.log('Closed the database connection.');
+  con.end(function(err) {
+    if (err) {
+      return console.log('error:' + err.message);
+    }
+    console.log('Closed the database connection.');
+  });
+  res.send("<h1>All OK</h1>");
 
-
-      });
-      res.end();
-    
-    })
+  })
       
    
  

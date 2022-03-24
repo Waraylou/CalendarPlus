@@ -44,7 +44,7 @@ h3 {
     height: calc(100vh - 4rem);
 }
 
-.cell {
+.month-cell {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -63,7 +63,7 @@ h3 {
     justify-content: center;
 }
 
-.date {
+.cell {
     display: flex;
     flex-direction: column;
     flex-basis: calc((100% * (1/7)));
@@ -73,9 +73,20 @@ h3 {
     justify-content: center;
 }
 
-.date div:hover:not(.selected) {
-    background-color: var(--clr-primary-400);
+.date {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    transition: outline 0.2s;
+}
+
+.date:hover {
     cursor: pointer;
+}
+
+.date:hover:not(.selected) {
+    outline: 3px solid var(--clr-primary-100);
+    outline-offset: 4px;
 }
 
 .padding {
@@ -83,6 +94,7 @@ h3 {
 }
 
 .selected {
-    outline: 2px solid var(--clr-primary-100);
+    outline: 3px solid var(--clr-primary-100);
+    outline-offset: 5px;
     border-radius: 50%;
 }

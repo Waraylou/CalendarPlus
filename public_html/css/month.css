@@ -72,12 +72,16 @@ h2[id=monthDisplay] {
     height: 20px;
     width: 20px;
     border-radius: 50%;
-    transition: background-color 0.2s;
+    transition: outline 0.2s;
 }
 
-.date div:hover:not(.selected) {
-    background-color: var(--clr-primary-400);
+.date:hover {
     cursor: pointer;
+}
+
+.date:hover:not(.selected) {
+    outline: 3px solid var(--clr-primary-100);
+    outline-offset: 4px;
 }
 
 .padding {
@@ -85,5 +89,7 @@ h2[id=monthDisplay] {
 }
 
 .selected {
-    background-color: var(--clr-primary-100);
+    outline: 3px solid var(--clr-primary-100);
+    outline-offset: 4px;
+    border-radius: 50%;
 }

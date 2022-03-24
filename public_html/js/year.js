@@ -50,7 +50,7 @@ function miniCalendar(dtRef, monthNum) {
     paddingDays = weekdays.indexOf(dateString.split(', ')[0]);
 
     monthCell = document.createElement('div');
-    monthCell.classList.add('cell');
+    monthCell.classList.add('month-cell');
     monthCell.id = `${months[month]}`;
 
     monthName = document.createElement('h3');
@@ -71,36 +71,56 @@ function miniCalendar(dtRef, monthNum) {
     monthCell.append(days);
 
     for (let i = paddingDays; i > 0; i--) {
+        daySquare = document.createElement('div');
+        daySquare.classList.add('cell');
+
         date = document.createElement('div');
         date.classList.add('date', 'padding');
         date.innerText = lastDayPrevMonth - i + 1;
-        monthCell.append(date);
+
+        daySquare.append(date);
+        monthCell.append(daySquare);
     }
 
     for (let i = 1; i <= daysInMonth; i++) {
+        daySquare = document.createElement('div');
+        daySquare.classList.add('cell');
+        
         date = document.createElement('div');
         date.classList.add('date');
         date.innerText = i;
         if(i == currDate.getDate() && month == currDate.getMonth() && year == currDate.getFullYear()) {
             date.classList.add('selected');
         }
-        monthCell.append(date);
+
+        daySquare.append(date);
+        monthCell.append(daySquare);
     }
 
     if (monthCell.childElementCount < 38) {
         for (let i = 1; i < (nextPaddingDays + 7); i++) {
+            daySquare = document.createElement('div');
+            daySquare.classList.add('cell');
+
             date = document.createElement('div');
             date.classList.add('date', 'padding');
             date.innerText = i;
-            monthCell.append(date);
+
+            daySquare.append(date);
+            monthCell.append(daySquare);
         } 
     }
     else {
         for (let i = 1; i < nextPaddingDays; i++) {
+            daySquare = document.createElement('div');
+            daySquare.classList.add('cell');
+
             date = document.createElement('div');
             date.classList.add('date', 'padding');
             date.innerText = i;
-            monthCell.append(date);
+
+            daySquare.append(date);
+            monthCell.append(daySquare);
         }
     }
 

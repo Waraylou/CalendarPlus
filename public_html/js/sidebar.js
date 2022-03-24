@@ -1,5 +1,7 @@
 const main = document.getElementById('sidebar');
 
+let sidebarNav = 0;
+
 // Initializes the main sidebar view
 function initializeMain() {
     const createButton = document.createElement('button');
@@ -11,6 +13,50 @@ function initializeMain() {
         initializeCreate();
     });
     main.appendChild(createButton);
+    const sidebarCalendar = document.createElement('div');
+    sidebarCalendar.id = 'sidebar-calendar';
+    sidebarCalendar.className = 'sidebar-calendar';
+    initializeSidebarCalendar(sidebarCalendar);
+    main.appendChild(sidebarCalendar);
+}
+
+function initializeSidebarCalendar(calendar) {
+    const dt = new Date();
+
+    if (sidebarNav !== 0) {
+        dt.setMonth(new Date().getMonth() + sidebarNav);
+    }
+    
+    day = dt.getDate();
+    month = dt.getMonth();
+    year = dt.getFullYear();
+
+    const firstDayOfMonth = new Date(year, month, 1);
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    const lastDayPrevMonth = new Date(year, month, 0).getDate();
+    const nextPaddingDays = 7 - new Date(year, month + 1, 0).getDay();
+
+    const dateString = firstDayOfMonth.toLocaleDateString('en-us', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+    })
+    const paddingDays = weekdays.indexOf(dateString.split(', ')[0]);
+
+    const displayViewed = document.createElement('h3');
+    displayViewed.id = 'sidebar-display-viewed';
+    displayViewed.innerText = `${dt.toLocaleDateString('en-us', {month: 'long'})} ${year}`;
+    calendar.appendChild(displayViewed);
+    
+    renderDaysOfWeek(calendar);
+
+    renderStartPadding(calendar, paddingDays, lastDayPrevMonth);
+
+    renderMonth(calendar, daysInMonth, dt);
+
+    renderExtraPadding(calendar, nextPaddingDays);
 }
 
 // CLears sidebar content

@@ -2,10 +2,7 @@ let nav = 0;
 let clicked = null;
 
 const calendar = document.getElementById('calendar');
-const currDate = new Date();
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-const weekdaysAbbr = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
 
 function load() {
     const dt = new Date();
@@ -58,88 +55,31 @@ function miniCalendar(dtRef, monthNum) {
     monthName.innerText = `${months[month]}`;
     monthCell.append(monthName);
 
-    days = document.createElement('div');
-    days.classList.add('weekdays');
+    renderDaysOfWeek(monthCell);
 
-    for (let i = 0; i < 7; i++) {
-        dayAbbr = document.createElement('div');
-        dayAbbr.classList.add('day');
-        dayAbbr.innerText = `${weekdaysAbbr[i]}`;
-        days.append(dayAbbr);
-    }
-    
-    monthCell.append(days);
+    renderStartPadding(monthCell, paddingDays, lastDayPrevMonth);
 
-    for (let i = paddingDays; i > 0; i--) {
-        daySquare = document.createElement('div');
-        daySquare.classList.add('cell');
-
-        date = document.createElement('div');
-        date.classList.add('date', 'padding');
-        date.innerText = lastDayPrevMonth - i + 1;
-
-        daySquare.append(date);
-        monthCell.append(daySquare);
-    }
-
-    for (let i = 1; i <= daysInMonth; i++) {
-        daySquare = document.createElement('div');
-        daySquare.classList.add('cell');
-        
-        date = document.createElement('div');
-        date.classList.add('date');
-        date.innerText = i;
-        if(i == currDate.getDate() && month == currDate.getMonth() && year == currDate.getFullYear()) {
-            date.classList.add('selected');
-        }
-
-        daySquare.append(date);
-        monthCell.append(daySquare);
-    }
+    renderMonth(monthCell, daysInMonth, dt);
 
     if (monthCell.childElementCount < 38) {
-        for (let i = 1; i < (nextPaddingDays + 7); i++) {
-            daySquare = document.createElement('div');
-            daySquare.classList.add('cell');
-
-            date = document.createElement('div');
-            date.classList.add('date', 'padding');
-            date.innerText = i;
-
-            daySquare.append(date);
-            monthCell.append(daySquare);
-        } 
+        renderExtraPadding(monthCell, nextPaddingDays);
     }
     else {
-        for (let i = 1; i < nextPaddingDays; i++) {
-            daySquare = document.createElement('div');
-            daySquare.classList.add('cell');
-
-            date = document.createElement('div');
-            date.classList.add('date', 'padding');
-            date.innerText = i;
-
-            daySquare.append(date);
-            monthCell.append(daySquare);
-        }
+        renderEndPadding(monthCell, nextPaddingDays);
     }
 
     return monthCell;
 }
 
-function clearCalendar() {
-    calendar.innerHTML = '';
-}
-
 function initButtons() {
     document.getElementById('nextButton').addEventListener('click', () => {
         nav++;
-        clearCalendar();
+        clearCalendar(calendar);
         load();
     })
     document.getElementById('prevButton').addEventListener('click', () => {
         nav--;
-        clearCalendar();
+        clearCalendar(calendar);
         load();
     })
 }

@@ -2,8 +2,6 @@ let nav = 0;
 let clicked = null;
 
 const calendar = document.getElementById('calendar');
-const currDate = new Date();
-const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 function load() {
     const dt = new Date();
@@ -32,71 +30,22 @@ function load() {
 
     document.getElementById('monthDisplay').innerText = `${dt.toLocaleDateString('en-us', {month: 'long'})} ${year}`
 
-    clearCalendar();
+    renderStartPadding(calendar, paddingDays, lastDayPrevMonth);
 
-    console.log(currDate);
-    console.log(dt);
+    renderMonth(calendar, daysInMonth, dt);
 
-    for(let i = paddingDays; i > 0; i--) {
-        const daySquare = document.createElement('div');
-        daySquare.classList.add('cell');
-
-        const date = document.createElement('div');
-        date.classList.add('date', 'padding');
-        date.innerText = lastDayPrevMonth - i + 1;
-
-        daySquare.addEventListener('click', () => console.log('click'));
-
-        daySquare.appendChild(date);
-        calendar.appendChild(daySquare);
-    }
-
-    for (let i = 1; i <= daysInMonth; i++) {
-        const daySquare = document.createElement('div');
-        daySquare.classList.add('cell');
-
-        const date = document.createElement('div');
-        date.classList.add('date');
-        date.innerText = i;
-        if(i == currDate.getDate() && month == currDate.getMonth() && year == currDate.getFullYear()) {
-            date.classList.add('selected');
-        }
-
-        daySquare.addEventListener('click', () => console.log('click'));
-
-        daySquare.appendChild(date);
-        calendar.appendChild(daySquare);
-    }
-
-    console.log(day);
-    console.log(currDate.getDate());
-
-    for(let i = 1; i < nextPaddingDays; i++) {
-        const daySquare = document.createElement('div');
-        daySquare.classList.add('cell');
-
-        const date = document.createElement('div');
-        date.classList.add('date', 'padding');
-        date.innerText = i;
-
-        daySquare.addEventListener('click', () => console.log('click'));
-
-        daySquare.appendChild(date);
-        calendar.appendChild(daySquare);
-    }
-}
-
-function clearCalendar() {
-    calendar.innerHTML = '';
+    renderEndPadding(calendar, nextPaddingDays);
 }
 
 function initButtons() {
     document.getElementById('nextButton').addEventListener('click', () => {
         nav++;
+        clearCalendar(calendar);
         load();
     })
     document.getElementById('prevButton').addEventListener('click', () => {
         nav--;
+        clearCalendar(calendar);
         load();
     })
 }

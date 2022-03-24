@@ -29,7 +29,7 @@ function miniCalendar(dtRef, monthNum) {
     dt = dtRef;
 
     dt.setMonth(monthNum);
-    dt.setDate(1); // To make current date highlighted, would need to compare dt against a currDate varialbe
+    dt.setDate(1); 
 
     day = dt.getDate();
     month = dt.getMonth();
@@ -81,6 +81,9 @@ function miniCalendar(dtRef, monthNum) {
         date = document.createElement('div');
         date.classList.add('date');
         date.innerText = i;
+        if(i == currDate.getDate() && month == currDate.getMonth() && year == currDate.getFullYear()) {
+            date.classList.add('selected');
+        }
         monthCell.append(date);
     }
 

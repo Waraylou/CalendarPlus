@@ -34,6 +34,9 @@ function load() {
 
     clearCalendar();
 
+    console.log(currDate);
+    console.log(dt);
+
     for(let i = paddingDays; i > 0; i--) {
         const daySquare = document.createElement('div');
         daySquare.classList.add('cell');
@@ -55,7 +58,7 @@ function load() {
         const date = document.createElement('div');
         date.classList.add('date');
         date.innerText = i;
-        if(i == currDate.getDate()) {
+        if(i == currDate.getDate() && month == currDate.getMonth() && year == currDate.getFullYear()) {
             date.classList.add('selected');
         }
 

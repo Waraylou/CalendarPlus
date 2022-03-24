@@ -83,5 +83,6 @@ h3 {
 }
 
 .selected {
-    background-color: var(--clr-primary-400);
+    outline: 2px solid var(--clr-primary-100);
+    border-radius: 50%;
 }

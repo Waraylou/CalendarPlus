@@ -14,7 +14,7 @@ function initializeLogin() {
     const loginForm = document.createElement('form');
     loginForm.name = 'loginForm';
     loginForm.method = 'POST'
-    loginForm.action = '/login'
+    loginForm.action = '/api/login'
 
     // Username field creation
     const username = document.createElement('input');

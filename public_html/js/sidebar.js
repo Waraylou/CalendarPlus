@@ -13,10 +13,12 @@ function initializeMain() {
         initializeCreate();
     });
     main.appendChild(createButton);
+
     const sidebarCalendar = document.createElement('div');
     sidebarCalendar.id = 'sidebar-calendar';
     sidebarCalendar.className = 'sidebar-calendar';
     initializeSidebarCalendar(sidebarCalendar);
+    
     main.appendChild(sidebarCalendar);
 }
 

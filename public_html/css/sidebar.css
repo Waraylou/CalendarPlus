@@ -73,6 +73,7 @@ input {
     height: 40px;
     border-radius: 20px;
     font-size: 1rem;
+    color-scheme: dark;
 }
 
 input::placeholder {
@@ -248,4 +249,8 @@ h3[id=sidebar-display-viewed] {
     width: 20px;
     border-radius: 50%;
     transition: outline 0.2s;
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: var(--clr-neutral-200);
 }

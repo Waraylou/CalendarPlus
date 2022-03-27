@@ -15,6 +15,17 @@
     margin-top: 4rem;
 }
 
+div[id=main-sidebar] {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-basis: 100%;
+    max-width: 100%;
+    align-items: flex-start;
+    min-height: 20rem;
+    max-height: 22rem;
+}
+
 form[id=manageEvent] {
     align-items: flex-start;
 }
@@ -56,6 +67,7 @@ button[id=save] {
 
 button[id=create] {
     flex-basis: 100%;
+    margin-bottom: 20px
 }
 
 form {      

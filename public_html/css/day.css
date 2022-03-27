@@ -12,12 +12,13 @@
     width: 100%;
 }
 
-.weekdays {
-    display: flex;
-    flex-basis: 100%;
-    flex-direction: row;
-    margin-left: 20rem;
-    height: 2rem;
+.weekday {
+    margin: 0;
+    padding: 1rem;
+    border-right: 0;
+    border-top: 0;
+    line-height: 1rem;
+    text-align: center;
 }
 
 .calendar {
@@ -26,7 +27,7 @@
     flex-basis: 100%;
     flex-direction: row;
     margin-left: 20rem;
-    height: calc(100vh - 6rem);
+    height: calc(100vh - 4rem);
 }
 
 .row {
@@ -48,15 +49,27 @@
 
 .cell {
     display: flex;
-    flex-direction: column;
-    flex-basis: calc((100% * (1/7)));
-    max-width: calc((100% * (1/7)));
-    text-align: center;
-    align-items: center;
+    flex-direction: row;
+    flex-basis: 100%;
+    max-width: 100%;
     border: 1px solid var(--clr-neutral-700); 
     border-right: 0;
     border-top: 0;
-    padding-top: 0.5rem;
+}
+
+.hour {
+    display: flex;
+    flex-direction: row;
+    flex-basis: 5%;
+    padding: 1rem;
+    border-right: var(--standard-border);
+    font-size: 0.75rem;
+}
+
+.event-space {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 95%;
 }
 
 .date {

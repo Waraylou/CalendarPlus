@@ -4,6 +4,9 @@ let sidebarNav = 0;
 
 // Initializes the main sidebar view
 function initializeMain() {
+    const mainSidebar = document.createElement('div');
+    mainSidebar.id = 'main-sidebar';
+
     const createButton = document.createElement('button');
     createButton.type = 'button';
     createButton.id = 'create';
@@ -12,14 +15,15 @@ function initializeMain() {
         clearSidebar();
         initializeCreate();
     });
-    main.appendChild(createButton);
+    mainSidebar.appendChild(createButton);
 
     const sidebarCalendar = document.createElement('div');
     sidebarCalendar.id = 'sidebar-calendar';
     sidebarCalendar.className = 'sidebar-calendar';
     initializeSidebarCalendar(sidebarCalendar);
+    mainSidebar.appendChild(sidebarCalendar);
     
-    main.appendChild(sidebarCalendar);
+    main.appendChild(mainSidebar);
 }
 
 function initializeSidebarCalendar(calendar) {

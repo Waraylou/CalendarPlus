@@ -16,6 +16,27 @@
     outline: none;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    visibility: hidden;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--clr-neutral-600);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--clr-neutral-600);
+}
+
+html {
+    overflow-y: scroll;
+}
+
 body {
     margin: 0;
     display: flex;

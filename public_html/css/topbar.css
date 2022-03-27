@@ -6,6 +6,9 @@
     width: 100vw;
     display: flex;
     align-items: center;
+    position: sticky;
+    top: 0;
+    background-color: var(--clr-neutral-800);
 }
 
 .logo {

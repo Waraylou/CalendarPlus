@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 01, 2022 at 08:09 PM
+-- Generation Time: Mar 29, 2022 at 07:00 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -32,6 +32,7 @@ USE `calendar`;
 DROP TABLE IF EXISTS `events`;
 CREATE TABLE `events` (
   `event_id` int(11) NOT NULL,
+  `event_title` varchar(255) NOT NULL,
   `user_name` varchar(250) NOT NULL,
   `eventStart` datetime NOT NULL,
   `eventEnd` datetime NOT NULL,

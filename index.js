@@ -63,6 +63,7 @@ app.post("/api/user", (req,res) => {
   res.redirect("/month.html");
   });
       
+  
 app.post("/api/login", (req,res) => {
   var username = req.body.username;
   var password = req.body.password;
@@ -79,8 +80,13 @@ app.post("/api/login", (req,res) => {
         req.session.username = username;
         
         res.redirect("/month.html");
-      } else{
-        res.send('Incorrect Username or Password, Please try again.');
+      } else {
+        //filler for now, can clean up later
+        res.send(`
+          <script>
+            alert("Username and Password do not match");
+            window.location.href = "/index.html";
+          </script>`);
       }
       res.end();
     }); 
@@ -88,8 +94,16 @@ app.post("/api/login", (req,res) => {
     res.end();
   }
 });
- 
+
+//WIP
+app.post("/api/events", (req,res) => {
+  //need to add event title to database? Also haven't figured out the colors or events yet so not added
+  var sql = `INSERT INTO events VALUES ('id', '${req.session.username}', '${req.body.start}', '${req.body.end}', '${req.body.location}', '${req.body.description}', 'NULL', 'NULL')`
+  con.query(sql, function (err, result) {
+    if(err) throw err;
+    console.log("Event added");
+  })
+  res.redirect('back')
+});
 
 app.listen(port, () => console.log(`server listening on port ${port}`));
-
-

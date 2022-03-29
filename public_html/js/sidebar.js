@@ -75,6 +75,8 @@ function initializeCreate() {
     // Form creation
     const createForm = document.createElement('form');
     createForm.id = 'manageEvent';
+    createForm.method = 'POST'
+    createForm.action = '/api/events'
 
         // Container for form fields
         const formFields = document.createElement('div');
@@ -97,6 +99,8 @@ function initializeCreate() {
             const startTime = document.createElement('input');
             startTime.type = 'datetime-local';
             formFields.appendChild(startTime);
+            startTime.name = "start";
+            startTime.id = "start";
 
             // Label for end time field
             const endLabel = document.createElement('label');
@@ -107,6 +111,8 @@ function initializeCreate() {
             const endTime = document.createElement('input');
             endTime.type = 'datetime-local';
             formFields.appendChild(endTime);
+            endTime.name = "end";
+            endTime.id = "end";
 
             // Label for all day checkbox
             const allDayLabel = document.createElement('label');

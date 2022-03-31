@@ -28,7 +28,7 @@ function load() {
     })
     const paddingDays = weekdays.indexOf(dateString.split(', ')[0]);
 
-    document.getElementById('monthDisplay').innerText = `${dt.toLocaleDateString('en-us', {month: 'long'})} ${year}`
+    document.getElementById('monthDisplay').innerText = `${dt.toLocaleDateString('en-us', {month: 'long'})} ${year}`;
 
     renderStartPadding(calendar, paddingDays, lastDayPrevMonth);
 

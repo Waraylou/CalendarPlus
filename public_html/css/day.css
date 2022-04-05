@@ -89,5 +89,7 @@
 }
 
 .selected {
-    background-color: var(--clr-primary-400);
+    outline: 3px solid var(--clr-primary-100);
+    outline-offset: 4px;
+    border-radius: 50%;
 }

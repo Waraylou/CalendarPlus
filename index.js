@@ -117,7 +117,8 @@ app.post("/api/login", (req,res) => {
 //WIP
 app.post("/api/events", (req,res) => {
   //need to add event title to database? Also haven't figured out the colors or events yet so not added
-  var sql = `INSERT INTO events VALUES ('id', '${req.session.username}', '${req.body.start}', '${req.body.end}', '${req.body.location}', '${req.body.description}', 'NULL', 'NULL')`
+  var sql = `INSERT INTO events (event_title, user_name, eventStart, eventEnd, eventLocation, eventDescription, reminderTime, eventColor)
+  VALUES ('${req.body.title}','${req.session.username}', '${req.body.start}', '${req.body.end}', '${req.body.location}', '${req.body.description}', '', '')`
   con.query(sql, function (err, result) {
     if(err) throw err;
     console.log("Event added");

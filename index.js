@@ -51,11 +51,12 @@ app.use(bodyParser.json())
 
 const redirectLogin = (req,res,next) => {
   if(!req.session.username){
-    res.redirect('/index.html')
+    res.redirect('/')
   }else{
     next()
   }
 };
+
 
 app.get('/month', redirectLogin, (req,res) =>{
   res.sendFile('/public_html/month.html',{root:__dirname})
@@ -97,7 +98,6 @@ app.post("/api/login", (req,res) => {
         req.session.loggedin = true;
         req.session.username = username;
 
-        console.log(session)
         res.redirect("/month");
       } else {
         //filler for now, can clean up later

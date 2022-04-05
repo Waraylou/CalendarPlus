@@ -4,7 +4,9 @@ const mysql = require('mysql')
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const session = require('express-session');
+const { Router } = require('express');
 const { response } = require('express');
+const req = require('express/lib/request');
 
 
 dotenv.config();
@@ -12,6 +14,11 @@ dotenv.config();
 const app = express();
 
 const port = process.env.PORT || 8100;
+
+// creates a value to represent one day's time in milliseconds 
+const oneDay = 1000 * 60 * 60 * 24;
+var sessions;
+
 
 var con = mysql.createConnection({
 host: "localhost",
@@ -28,20 +35,31 @@ con.connect(function(err) {
   console.log("CONNECTION MADE WITH SQL SERVER!")
 });
 
+
 app.use(session({
   secret: 'secret',
+  cookie: {maxAge: oneDay }, 
   resave: true,
   saveUninitialized: true
 }));
+
+
 app.use(express.static(__dirname + '/public_html'))
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
-   
-app.get('/', (req, res) => {
-  res.sendFile('/public_html/index.html');
-});
 
+const redirectLogin = (req,res,next) => {
+  if(!req.session.username){
+    res.redirect('/index.html')
+  }else{
+    next()
+  }
+};
+
+app.get('/month', redirectLogin, (req,res) =>{
+  res.sendFile('/public_html/month.html',{root:__dirname})
+});
 
 app.post("/api/user", (req,res) => {
   var sql = `INSERT INTO users VALUES ('${req.body.username}', '${req.body.password}', '${req.body.email}')`
@@ -56,11 +74,11 @@ app.post("/api/user", (req,res) => {
   //   }
   //   console.log('Closed the database connection.');
   // });
-  //res.send("<h1>All OK</h1>")
+
   req.session.loggedin = true;
   req.session.username = req.body.username;
 
-  res.redirect("/month.html");
+  res.redirect("/month");
   });
       
   
@@ -78,8 +96,9 @@ app.post("/api/login", (req,res) => {
       if(results.length > 0){
         req.session.loggedin = true;
         req.session.username = username;
-        
-        res.redirect("/month.html");
+
+        console.log(session)
+        res.redirect("/month");
       } else {
         //filler for now, can clean up later
         res.send(`
@@ -105,5 +124,11 @@ app.post("/api/events", (req,res) => {
   })
   res.redirect('back')
 });
+
+app.post('/api/logout', (req, res) => {
+  req.session.destroy();
+  console.log(req.session)
+  res.redirect('/')
+})
 
 app.listen(port, () => console.log(`server listening on port ${port}`));

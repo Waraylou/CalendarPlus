@@ -4,10 +4,7 @@ const mysql = require('mysql')
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const session = require('express-session');
-const { Router } = require('express');
-const { response } = require('express');
-const req = require('express/lib/request');
-
+//const fetch = require('node-fetch');
 
 dotenv.config();
 
@@ -17,7 +14,7 @@ const port = process.env.PORT || 8100;
 
 // creates a value to represent one day's time in milliseconds 
 const oneDay = 1000 * 60 * 60 * 24;
-var sessions;
+
 
 
 var con = mysql.createConnection({
@@ -59,15 +56,33 @@ const redirectLogin = (req,res,next) => {
 
 
 app.get('/month', redirectLogin, (req,res) =>{
+  
   res.sendFile('/public_html/month.html',{root:__dirname})
+
 });
 
+
+app.get('/monthData', redirectLogin, (req,res) =>{
+  var sql = `SELECT * FROM EVENTS WHERE user_name = '${req.session.username}';`
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    
+    else{
+      //console.log(result)
+      res.send(result)}
+  });
+});
+
+
+//inserts user into the database
 app.post("/api/user", (req,res) => {
   var sql = `INSERT INTO users VALUES ('${req.body.username}', '${req.body.password}', '${req.body.email}')`
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("1 record inserted")
-  });
+ 
+    });
+
 
   // con.end(function(err) {
   //   if (err) {
@@ -80,9 +95,10 @@ app.post("/api/user", (req,res) => {
   req.session.username = req.body.username;
 
   res.redirect("/month");
-  });
+});
       
-  
+// queries the database and if credntials match those in the database, the user will be redirected to the month page
+// if the user fails to match the credentials in the database an error will appear
 app.post("/api/login", (req,res) => {
   var username = req.body.username;
   var password = req.body.password;
@@ -114,7 +130,7 @@ app.post("/api/login", (req,res) => {
   }
 });
 
-//WIP
+// inserts events into the database
 app.post("/api/events", (req,res) => {
   //need to add event title to database? Also haven't figured out the colors or events yet so not added
   var sql = `INSERT INTO events (event_title, user_name, eventStart, eventEnd, eventLocation, eventDescription, reminderTime, eventColor)
@@ -123,7 +139,7 @@ app.post("/api/events", (req,res) => {
     if(err) throw err;
     console.log("Event added");
   })
-  res.redirect('back')
+  res.send('back')
 });
 
 app.post('/api/logout', (req, res) => {

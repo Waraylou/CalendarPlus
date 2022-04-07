@@ -48,6 +48,11 @@ div[id=right] {
     color: var(--clr-neutral-200);
 }
 
+form[name=logout] {
+    width: 100px;
+    margin-left: 20px;
+}
+
 button[id=logout] {
     width: 100px;
     margin-left: 20px;

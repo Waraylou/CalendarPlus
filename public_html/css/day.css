@@ -76,7 +76,15 @@
     height: 20px;
     width: 20px;
     border-radius: 50%;
-    transition: background-color 0.2s;
+    transition: outline 0.2s;
+    background: none;
+    padding: 0;
+    font-weight: normal;
+}
+
+.date:hover {
+    cursor: pointer;
+    background: none;
 }
 
 .date div:hover:not(.selected) {

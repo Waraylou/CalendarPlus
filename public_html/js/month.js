@@ -1,18 +1,25 @@
-let nav = 0;
 let clicked = null;
 
 const calendar = document.getElementById('calendar');
 
-function load() {
+const urlParams = new URLSearchParams(window.location.search);
+let d = parseInt(urlParams.get('day'));
+let m = parseInt(urlParams.get('month'));
+let y = parseInt(urlParams.get('year'));
+
+// if there are no url params, load the current month
+if (isNaN(d) || isNaN(m) || isNaN(y)) {
+    d = currDate.getDate();
+    m = currDate.getMonth();
+    y = currDate.getFullYear();
+}
+
+function load(day = d, month = m, year = y) {
     const dt = new Date();
 
-    if (nav !== 0) {
-        dt.setMonth(new Date().getMonth() + nav);
-    }
-    
-    day = dt.getDate();
-    month = dt.getMonth();
-    year = dt.getFullYear();
+    dt.setFullYear(year);
+    dt.setMonth(month);
+    dt.setDate(day);
 
     const firstDayOfMonth = new Date(year, month, 1);
     const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -32,20 +39,30 @@ function load() {
 
     renderStartPadding(calendar, paddingDays, lastDayPrevMonth);
 
-    renderMonth(calendar, daysInMonth, dt);
+    renderMonth(calendar, daysInMonth, dt, month, year);
 
     renderEndPadding(calendar, nextPaddingDays);
 }
 
 function initButtons() {
     document.getElementById('nextButton').addEventListener('click', () => {
-        nav++;
         clearCalendar(calendar);
+        m += 1;
+        if (m > 11) {
+            m = 0;
+            y += 1;
+        }
+        window.history.replaceState({}, '', `?day=${d}&month=${m}&year=${y}`);
         load();
     })
     document.getElementById('prevButton').addEventListener('click', () => {
-        nav--;
         clearCalendar(calendar);
+        m -= 1;
+        if (m < 0) {
+            m = 11;
+            y -= 1;
+        }
+        window.history.replaceState({}, '', `?day=${d}&month=${m}&year=${y}`);
         load();
     })
 }

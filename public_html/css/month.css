@@ -73,10 +73,14 @@ h2[id=monthDisplay] {
     width: 20px;
     border-radius: 50%;
     transition: outline 0.2s;
+    background: none;
+    padding: 0;
+    font-weight: normal;
 }
 
 .date:hover {
     cursor: pointer;
+    background: none;
 }
 
 .date:hover:not(.selected) {

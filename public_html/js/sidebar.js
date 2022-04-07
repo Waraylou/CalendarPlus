@@ -60,7 +60,7 @@ function initializeSidebarCalendar(calendar) {
 
     renderStartPadding(calendar, paddingDays, lastDayPrevMonth);
 
-    renderMonth(calendar, daysInMonth, dt);
+    renderMonth(calendar, daysInMonth, dt, month, year);
 
     renderExtraPadding(calendar, nextPaddingDays);
 }

@@ -70,15 +70,6 @@ button[id=create] {
     margin-bottom: 20px
 }
 
-form {      
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    flex-basis: 100%;
-    justify-content: center;
-    max-width: 500px;
-}
-
 input {
     margin-bottom: 20px;
     width: 100%;

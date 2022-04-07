@@ -1,21 +1,26 @@
-let nav = 0;
 let clicked = null;
 
 const calendar = document.getElementById('calendar');
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-function load() {
+const urlParams = new URLSearchParams(window.location.search);
+let d = parseInt(urlParams.get('day'));
+let m = parseInt(urlParams.get('month'));
+let y = parseInt(urlParams.get('year'));
+
+// if there are no url params, load the current month
+if (isNaN(d) || isNaN(m) || isNaN(y)) {
+    d = currDate.getDate();
+    m = currDate.getMonth();
+    y = currDate.getFullYear();
+}
+
+function load(year = y) {
     const dt = new Date();
 
-    if (nav !== 0) {
-        dt.setFullYear(new Date().getFullYear() + nav);
-    }
+    dt.setFullYear(year);
 
-    const year = dt.getFullYear();
-
-    document.getElementById('yearDisplay').innerText = `${year}`
-
-    console.log(dt);
+    document.getElementById('yearDisplay').innerText = `${year}`;
 
     for (let i = 0; i < 12; i++) {
         calendar.append(miniCalendar(dt, i));
@@ -23,34 +28,33 @@ function load() {
 }
 
 function miniCalendar(dtRef, monthNum) {
-    dt = dtRef;
+    const dt = dtRef;
 
     dt.setMonth(monthNum);
     dt.setDate(1); 
 
-    day = dt.getDate();
-    month = dt.getMonth();
-    year = dt.getFullYear();
+    const month = monthNum;
+    const year = y;
 
-    firstDayOfMonth = new Date(year, month, 1);
-    daysInMonth = new Date(year, month + 1, 0).getDate();
+    const firstDayOfMonth = new Date(year, month, 1);
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-    lastDayPrevMonth = new Date(year, month, 0).getDate();
-    nextPaddingDays = 7 - new Date(year, month + 1, 0).getDay();
+    const lastDayPrevMonth = new Date(year, month, 0).getDate();
+    const nextPaddingDays = 7 - new Date(year, month + 1, 0).getDay();
 
-    dateString = firstDayOfMonth.toLocaleDateString('en-us', {
+    const dateString = firstDayOfMonth.toLocaleDateString('en-us', {
         weekday: 'long',
         year: 'numeric',
         month: 'numeric',
         day: 'numeric',
     })
-    paddingDays = weekdays.indexOf(dateString.split(', ')[0]);
+    const paddingDays = weekdays.indexOf(dateString.split(', ')[0]);
 
-    monthCell = document.createElement('div');
+    const monthCell = document.createElement('div');
     monthCell.classList.add('month-cell');
     monthCell.id = `${months[month]}`;
 
-    monthName = document.createElement('h3');
+    const monthName = document.createElement('h3');
     monthName.classList.add('month');
     monthName.innerText = `${months[month]}`;
     monthCell.append(monthName);
@@ -59,7 +63,7 @@ function miniCalendar(dtRef, monthNum) {
 
     renderStartPadding(monthCell, paddingDays, lastDayPrevMonth);
 
-    renderMonth(monthCell, daysInMonth, dt);
+    renderMonth(monthCell, daysInMonth, dt, month, year);
 
     if (monthCell.childElementCount < 38) {
         renderExtraPadding(monthCell, nextPaddingDays);
@@ -73,13 +77,13 @@ function miniCalendar(dtRef, monthNum) {
 
 function initButtons() {
     document.getElementById('nextButton').addEventListener('click', () => {
-        nav++;
         clearCalendar(calendar);
+        y += 1;
         load();
     })
     document.getElementById('prevButton').addEventListener('click', () => {
-        nav--;
         clearCalendar(calendar);
+        y -= 1;
         load();
     })
 }

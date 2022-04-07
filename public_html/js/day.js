@@ -1,20 +1,25 @@
-let nav = 0;
 let clicked = null;
 
 const calendar = document.getElementById('calendar');
 
-function load() {
+const urlParams = new URLSearchParams(window.location.search);
+let d = parseInt(urlParams.get('day'));
+let m = parseInt(urlParams.get('month'));
+let y = parseInt(urlParams.get('year'));
+
+// if there are no url params, load the current day
+if (isNaN(d) || isNaN(m) || isNaN(y)) {
+    d = currDate.getDate();
+    m = currDate.getMonth();
+    y = currDate.getFullYear();
+}
+
+function load(day = d, month = m, year = y) {
     const dt = new Date();
 
-    if (nav !== 0) {
-        dt.setDate(new Date().getDate() + nav);
-    }
-    
-    day = dt.getDate();
-    month = dt.getMonth();
-    year = dt.getFullYear();
-
-    console.log(dt);
+    dt.setFullYear(year);
+    dt.setMonth(month);
+    dt.setDate(day);
 
     // Get the dayDisplay DOM element
     const dayDisplay = document.getElementById('dayDisplay');
@@ -50,15 +55,40 @@ function load() {
 
 function initButtons() {
     document.getElementById('nextButton').addEventListener('click', () => {
-        nav++;
         clearCalendar(calendar);
+        d += 1;
+        if (d > daysInMonth()) {
+            d = 1;
+            m += 1;
+        }
+        if (m > 11) {
+            m = 0;
+            y += 1;
+        }
+        // update the url without refreshing the page
+        window.history.replaceState({}, '', `?day=${d}&month=${m}&year=${y}`);
         load();
     })
     document.getElementById('prevButton').addEventListener('click', () => {
-        nav--;
         clearCalendar(calendar);
+        console.log(daysInMonth());
+        d -= 1;
+        if (d < 1) {
+            m -= 1;
+            d = daysInMonth();
+        }
+        if (m < 0) {
+            m = 11;
+            y -= 1;
+        }
+        // update the url without refreshing the page
+        window.history.replaceState({}, '', `?day=${d}&month=${m}&year=${y}`);
         load();
     })
+}
+
+function daysInMonth() {
+    return new Date(y, m + 1, 0).getDate();
 }
 
 initButtons();

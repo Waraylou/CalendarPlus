@@ -86,7 +86,6 @@ app.post("/api/user", (req,res) => {
  
     });
 
-
   // con.end(function(err) {
   //   if (err) {
   //     return console.log('error:' + err.message);

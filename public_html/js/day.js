@@ -5,7 +5,7 @@ const calendar = document.getElementById('calendar');
 // Get the current date from the URL
 const urlParams = new URLSearchParams(window.location.search);
 let dateParam = urlParams.get('date');
-console.log(dateParam);
+
 if (dateParam) {
     const date = dateParam.split('-');
     d = parseInt(date[1]);

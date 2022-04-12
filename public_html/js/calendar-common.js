@@ -17,7 +17,7 @@ function renderDaysOfWeek(cell) {
 }
 
 // Renders days from the previous month that would be visible on calendar for current month
-function renderStartPadding(cell, paddingDays, lastDayPrevMonth) {
+function renderStartPadding(cell, paddingDays, lastDayPrevMonth, renderEvents = false) {
     for (let i = paddingDays; i > 0; i--) {
         daySquare = document.createElement('div');
         daySquare.classList.add('cell');
@@ -27,12 +27,20 @@ function renderStartPadding(cell, paddingDays, lastDayPrevMonth) {
         date.innerText = lastDayPrevMonth - i + 1;
 
         daySquare.append(date);
+
+        if (renderEvents) {
+            eventsDiv = document.createElement('div');
+            eventsDiv.classList.add('events');
+            eventsDiv.id = `${month + 1}-${i}-${year}`;
+            daySquare.append(eventsDiv);
+        }
+
         cell.append(daySquare);
     }
 }
 
 // Renders days from the current month onto the calendar
-function renderMonth(cell, daysInMonth, dt, month, year) {
+function renderMonth(cell, daysInMonth, dt, month, year, renderEvents = false) {
     for (let i = 1; i <= daysInMonth; i++) {
         daySquare = document.createElement('div');
         daySquare.classList.add('cell');
@@ -49,12 +57,20 @@ function renderMonth(cell, daysInMonth, dt, month, year) {
         }
 
         daySquare.append(date);
+
+        if (renderEvents) {
+            eventsDiv = document.createElement('div');
+            eventsDiv.classList.add('events');
+            eventsDiv.id = `${month + 1}-${i}-${year}`;
+            daySquare.append(eventsDiv);
+        }
+
         cell.append(daySquare);
     }
 }
 
 // Renders days from the next month + extra, to ensure that all months contain 6 rows
-function renderEndPadding(cell, nextPaddingDays) {
+function renderEndPadding(cell, nextPaddingDays, renderEvents = false) {
     for (let i = 1; i < nextPaddingDays; i++) {
         daySquare = document.createElement('div');
         daySquare.classList.add('cell');
@@ -64,12 +80,20 @@ function renderEndPadding(cell, nextPaddingDays) {
         date.innerText = i;
 
         daySquare.append(date);
+
+        if (renderEvents) {
+            eventsDiv = document.createElement('div');
+            eventsDiv.classList.add('events');
+            eventsDiv.id = `${month + 1}-${i}-${year}`;
+            daySquare.append(eventsDiv);
+        }
+
         cell.append(daySquare);
     }
 }
 
 // Renders days from the next month that would be visible on the calendar for the current month
-function renderExtraPadding(cell, nextPaddingDays) {
+function renderExtraPadding(cell, nextPaddingDays, renderEvents = false) {
     for (let i = 1; i < (nextPaddingDays + 7); i++) {
         daySquare = document.createElement('div');
         daySquare.classList.add('cell');

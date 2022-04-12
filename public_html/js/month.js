@@ -2,13 +2,18 @@ let clicked = null;
 
 const calendar = document.getElementById('calendar');
 
+// Get the current date from the URL
 const urlParams = new URLSearchParams(window.location.search);
-let d = parseInt(urlParams.get('day'));
-let m = parseInt(urlParams.get('month'));
-let y = parseInt(urlParams.get('year'));
-
-// if there are no url params, load the current month
-if (isNaN(d) || isNaN(m) || isNaN(y)) {
+let dateParam = urlParams.get('date');
+console.log(dateParam);
+if (dateParam) {
+    const date = dateParam.split('-');
+    d = parseInt(date[1]);
+    m = parseInt(date[0]) - 1;
+    y = parseInt(date[2]);
+}
+else {
+    // if there are no url params, load the current day
     d = currDate.getDate();
     m = currDate.getMonth();
     y = currDate.getFullYear();
@@ -52,7 +57,7 @@ function initButtons() {
             m = 0;
             y += 1;
         }
-        window.history.replaceState({}, '', `?day=${d}&month=${m}&year=${y}`);
+        window.history.replaceState({}, '', `?date=${m + 1}-${d}-${y}`);
         load();
     })
     document.getElementById('prevButton').addEventListener('click', () => {
@@ -62,7 +67,7 @@ function initButtons() {
             m = 11;
             y -= 1;
         }
-        window.history.replaceState({}, '', `?day=${d}&month=${m}&year=${y}`);
+        window.history.replaceState({}, '', `?date=${m + 1}-${d}-${y}`);
         load();
     })
 }

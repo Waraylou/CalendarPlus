@@ -32,7 +32,7 @@ function renderStartPadding(cell, paddingDays, lastDayPrevMonth) {
 }
 
 // Renders days from the current month onto the calendar
-function renderMonth(cell, daysInMonth, dt) {
+function renderMonth(cell, daysInMonth, dt, month, year) {
     for (let i = 1; i <= daysInMonth; i++) {
         daySquare = document.createElement('div');
         daySquare.classList.add('cell');
@@ -40,6 +40,10 @@ function renderMonth(cell, daysInMonth, dt) {
         date = document.createElement('div');
         date.classList.add('date');
         date.innerText = i;
+        date.addEventListener('click', () => {
+            // redirect to the day page for the selected date
+            window.location.href = `/day?date=${month + 1}-${i}-${year}`;
+        });
         if(i == currDate.getDate() && dt.getMonth() == currDate.getMonth() && dt.getFullYear() == currDate.getFullYear()) {
             date.classList.add('selected');
         }

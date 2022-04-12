@@ -62,6 +62,10 @@ app.get('/month', redirectLogin, (req,res) =>{
   res.sendFile('/public_html/month.html',{root:__dirname})
 });
 
+app.get('/day', (req,res) =>{
+  res.sendFile('/public_html/day.html',{root:__dirname})
+});
+
 app.post("/api/user", (req,res) => {
   var sql = `INSERT INTO users VALUES ('${req.body.username}', '${req.body.password}', '${req.body.email}')`
   con.query(sql, function (err, result) {

@@ -1,18 +1,4 @@
 :root {
-    --clr-primary-100: rgba(33, 150, 243, 0.5);
-    --clr-neutral-100: #000000;
-	--clr-neutral-200: #0B0C0D;
-    --clr-neutral-250: #545B5E;
-    --clr-neutral-300: #282B2D;
-    --clr-neutral-600: #545B5E;
-    --clr-neutral-600: #cacaca;
-    --clr-neutral-700: #cacaca;
-    --clr-neutral-800: #FFFFFF;
-    --standard-border: 1px solid var(--clr-neutral-700);
-    --input-outline: 2px solid var(--clr-neutral-300);
-}
-
-/* 
     --clr-primary-100: #2196f3;
     --clr-neutral-100: #FFFFFF;
 	--clr-neutral-200: #cacaca;
@@ -22,7 +8,9 @@
     --clr-neutral-700: #17191A;
     --clr-neutral-800: #0B0C0D;
     --clr-neutral-900: #000000;
- */
+    --standard-border: 1px solid var(--clr-neutral-700);
+    --input-outline: 2px solid var(--clr-neutral-300);
+}
 
 :focus {
     outline: none;

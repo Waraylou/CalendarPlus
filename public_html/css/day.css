@@ -102,8 +102,7 @@ h2[id=dayDisplay] {
 }
 
 .selected {
-    outline: 5px solid var(--clr-primary-100);
-    background-color: var(--clr-primary-100);
-    outline-offset: -0.5px;
+    outline: 3px solid var(--clr-primary-100);
+    outline-offset: 4px;
     border-radius: 50%;
 }

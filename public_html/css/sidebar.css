@@ -67,9 +67,7 @@ button[id=save] {
 
 button[id=create] {
     flex-basis: 100%;
-    margin-bottom: 20px;
-    background-color: #0c00ff;
-    color: white;
+    margin-bottom: 20px
 }
 
 input {

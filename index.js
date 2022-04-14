@@ -69,10 +69,13 @@ app.get('/monthData', redirectLogin, (req,res) =>{
     
     else{
       //console.log(result)
-      res.send(result)}
-  });
+      res.send(result)
+   }});
 });
 
+app.get('/day', (req,res) => {
+  res.sendFile('/public_html/day.html',{root:__dirname})
+})
 
 //inserts user into the database
 app.post("/api/user", (req,res) => {

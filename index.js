@@ -69,8 +69,8 @@ app.get('/monthData', redirectLogin, (req,res) =>{
     
     else{
       //console.log(result)
-      res.send(result)}
-  });
+      res.send(result)
+   }});
 });
 
 app.get('/day', (req,res) =>{

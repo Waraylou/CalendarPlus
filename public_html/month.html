@@ -54,6 +54,19 @@
     <script src="js/calendar-common.js"></script>
     <script src="js/sidebar.js"></script>
     <script src="js/month.js"></script>
-    <script src="js/fetchData.js"></script>
+    <script>
+
+    async function getMonthData(){
+        let response = await fetch('/monthData')
+        .then(response => response.json())
+        .then(data =>  {return data })
+        
+        return response;
+        
+    }
+    let monthData = getMonthData()
+    monthData.then(val => {console.log(val)})
+    
+    </script>
 </body>
 </html>

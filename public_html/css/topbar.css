@@ -28,7 +28,7 @@
 }
 
 .arrow {
-    background-color: var(--clr-neutral-700);
+    background-color: #0c00ff;
     border: none;
     height: 35px;
     width: 35px;
@@ -46,6 +46,7 @@ div[id=right] {
 
 .fa-solid {
     color: var(--clr-neutral-200);
+    color: white;
 }
 
 form[name=logout] {
@@ -54,6 +55,8 @@ form[name=logout] {
 
 button[id=logout] {
     width: 100px;
+    background-color: #0c00ff;
+    color: white;
 }
 
 .top-right {
@@ -64,6 +67,8 @@ button[id=logout] {
 
 .dropbtn {
     width: 160px;
+    background-color: #0c00ff;
+    color: white;
 }
   
 /* The container <div> - needed to position the dropdown content */
@@ -76,7 +81,7 @@ button[id=logout] {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: var(--clr-neutral-700);
+    background-color: #0c00ff;
     width: 100%;
     border-radius: 12%;
 }

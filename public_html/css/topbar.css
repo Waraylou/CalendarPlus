@@ -49,16 +49,15 @@ div[id=right] {
 }
 
 form[name=logout] {
-    width: 100px;
     margin-left: 20px;
 }
 
 button[id=logout] {
     width: 100px;
-    margin-left: 20px;
 }
 
 .top-right {
+    display: flex;
     margin-left: auto;
     margin-right: 20px;
 }

@@ -97,3 +97,11 @@ h2[id=monthDisplay] {
     outline-offset: 4px;
     border-radius: 50%;
 }
+
+.events {
+    display: flex;
+    flex-direction: row;
+    flex-basis: 100%;
+    flex-wrap: wrap;
+    width: 100%;
+}

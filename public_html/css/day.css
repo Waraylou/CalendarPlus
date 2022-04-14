@@ -12,6 +12,11 @@
     width: 100%;
 }
 
+h2[id=dayDisplay] {
+    text-align: center;
+    flex-basis: 70%;
+}
+
 .weekday {
     margin: 0;
     padding: 1rem;

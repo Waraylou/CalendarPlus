@@ -73,9 +73,9 @@ app.get('/monthData', redirectLogin, (req,res) =>{
    }});
 });
 
-app.get('/day', (req,res) => {
+app.get('/day', (req,res) =>{
   res.sendFile('/public_html/day.html',{root:__dirname})
-})
+});
 
 //inserts user into the database
 app.post("/api/user", (req,res) => {
@@ -85,7 +85,6 @@ app.post("/api/user", (req,res) => {
     console.log("1 record inserted")
  
     });
-
 
   // con.end(function(err) {
   //   if (err) {

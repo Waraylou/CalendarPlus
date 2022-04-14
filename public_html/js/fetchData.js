@@ -1,7 +1,11 @@
 //import fetch from 'node-fetch';
 
-fetch('/monthData')
-    .then( responce => responce.json())
-    .then( json => {console.log(json)} )
-    .catch( err => console.error(`Fetch problem: ${err.message}`));
 
+// async function getMonthData(){
+//     let response = await fetch('/monthData')
+//     .then(response => response.json())
+//     .then(data =>  {return data })
+    
+//     return response;
+    
+// }

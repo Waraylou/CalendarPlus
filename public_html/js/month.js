@@ -42,11 +42,11 @@ function load(day = d, month = m, year = y) {
 
     document.getElementById('monthDisplay').innerText = `${dt.toLocaleDateString('en-us', {month: 'long'})} ${year}`;
 
-    renderStartPadding(calendar, paddingDays, lastDayPrevMonth, true);
+    renderStartPadding(calendar, paddingDays, lastDayPrevMonth, month - 1, year, true);
 
     renderMonth(calendar, daysInMonth, dt, month, year, true);
 
-    renderEndPadding(calendar, nextPaddingDays, true);
+    renderEndPadding(calendar, nextPaddingDays, month + 1, year, true);
 }
 
 function initButtons() {

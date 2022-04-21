@@ -17,7 +17,7 @@ function renderDaysOfWeek(cell) {
 }
 
 // Renders days from the previous month that would be visible on calendar for current month
-function renderStartPadding(cell, paddingDays, lastDayPrevMonth, renderEvents = false) {
+function renderStartPadding(cell, paddingDays, lastDayPrevMonth, month, year, renderEvents = false) {
     for (let i = paddingDays; i > 0; i--) {
         daySquare = document.createElement('div');
         daySquare.classList.add('cell');
@@ -31,7 +31,7 @@ function renderStartPadding(cell, paddingDays, lastDayPrevMonth, renderEvents = 
         if (renderEvents) {
             eventsDiv = document.createElement('div');
             eventsDiv.classList.add('events');
-            eventsDiv.id = `${month}-${lastDayPrevMonth - i + 1}-${year}`;
+            eventsDiv.id = `${month + 1}-${lastDayPrevMonth - i + 1}-${year}`;
             daySquare.append(eventsDiv);
         }
 
@@ -70,7 +70,7 @@ function renderMonth(cell, daysInMonth, dt, month, year, renderEvents = false) {
 }
 
 // Renders days from the next month + extra, to ensure that all months contain 6 rows
-function renderEndPadding(cell, nextPaddingDays, renderEvents = false) {
+function renderEndPadding(cell, nextPaddingDays, month, year, renderEvents = false) {
     for (let i = 1; i < nextPaddingDays; i++) {
         daySquare = document.createElement('div');
         daySquare.classList.add('cell');
@@ -84,7 +84,7 @@ function renderEndPadding(cell, nextPaddingDays, renderEvents = false) {
         if (renderEvents) {
             eventsDiv = document.createElement('div');
             eventsDiv.classList.add('events');
-            eventsDiv.id = `${month + 2}-${i}-${year}`;
+            eventsDiv.id = `${month + 1}-${i}-${year}`;
             daySquare.append(eventsDiv);
         }
 

@@ -93,15 +93,18 @@ monthData.then(val => {
         let endDate = new Date(val[i].eventEnd);
         // get the day month and year from the date object
         let eventEnd = `${endDate.getMonth() + 1}-${endDate.getDate()}-${endDate.getFullYear()}`;
-        // create a div element to hold the event
-        let eventDiv = document.createElement('div');
-        eventDiv.classList.add('event');
-        // create a div element to hold the event title
-        let eventTitle = document.createElement('div');
-        // set the event title to the event title from the database
-        eventTitle.innerText = val[i].event_title;
-        // add the event div to the events div of that day
-        eventDiv.appendChild(eventTitle);
-        document.getElementById(eventStart).appendChild(eventDiv);
+        // if the event div exists, add the event to the div
+        if (document.getElementById(eventStart)) {
+            // create a div element to hold the event
+            let eventDiv = document.createElement('div');
+            eventDiv.classList.add('event');
+            // create a div element to hold the event title
+            let eventTitle = document.createElement('div');
+            // set the event title to the event title from the database
+            eventTitle.innerText = val[i].event_title;
+            // add the event div to the events div of that day
+            eventDiv.appendChild(eventTitle);
+            document.getElementById(eventStart).appendChild(eventDiv);
+        }
     }
 });

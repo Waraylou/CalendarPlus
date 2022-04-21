@@ -84,7 +84,7 @@ function renderEndPadding(cell, nextPaddingDays, renderEvents = false) {
         if (renderEvents) {
             eventsDiv = document.createElement('div');
             eventsDiv.classList.add('events');
-            eventsDiv.id = `${month + 1}-${i}-${year}`;
+            eventsDiv.id = `${month + 2}-${i}-${year}`;
             daySquare.append(eventsDiv);
         }
 

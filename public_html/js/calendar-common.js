@@ -31,7 +31,7 @@ function renderStartPadding(cell, paddingDays, lastDayPrevMonth, renderEvents = 
         if (renderEvents) {
             eventsDiv = document.createElement('div');
             eventsDiv.classList.add('events');
-            eventsDiv.id = `${month + 1}-${i}-${year}`;
+            eventsDiv.id = `${month}-${lastDayPrevMonth - i + 1}-${year}`;
             daySquare.append(eventsDiv);
         }
 

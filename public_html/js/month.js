@@ -5,7 +5,7 @@ const calendar = document.getElementById('calendar');
 // Get the current date from the URL
 const urlParams = new URLSearchParams(window.location.search);
 let dateParam = urlParams.get('date');
-console.log(dateParam);
+
 if (dateParam) {
     const date = dateParam.split('-');
     d = parseInt(date[1]);
@@ -57,8 +57,7 @@ function initButtons() {
             m = 0;
             y += 1;
         }
-        window.history.replaceState({}, '', `?date=${m + 1}-${d}-${y}`);
-        load();
+        window.location.href = `/month?date=${m + 1}-${d}-${y}`;
     })
     document.getElementById('prevButton').addEventListener('click', () => {
         clearCalendar(calendar);
@@ -67,10 +66,42 @@ function initButtons() {
             m = 11;
             y -= 1;
         }
-        window.history.replaceState({}, '', `?date=${m + 1}-${d}-${y}`);
-        load();
+        // redirect the page to the previous month
+        window.location.href = `/month?date=${m + 1}-${d}-${y}`;
     })
 }
 
 initButtons();
 load();
+
+async function getMonthData(){
+    let response = await fetch('/monthData')
+    .then(response => response.json())
+    .then(data =>  {return data })
+    
+    return response;
+    
+}
+let monthData = getMonthData()
+monthData.then(val => {
+    for (let i = 0; i < val.length; i++) {
+        // convert val[0].eventStart to a date object
+        let startDate = new Date(val[i].eventStart);
+        // get the day month and year from the date object
+        let eventStart = `${startDate.getMonth() + 1}-${startDate.getDate()}-${startDate.getFullYear()}`;
+        // convert val[0].eventEnd to a date object
+        let endDate = new Date(val[i].eventEnd);
+        // get the day month and year from the date object
+        let eventEnd = `${endDate.getMonth() + 1}-${endDate.getDate()}-${endDate.getFullYear()}`;
+        // create a div element to hold the event
+        let eventDiv = document.createElement('div');
+        eventDiv.classList.add('event');
+        // create a div element to hold the event title
+        let eventTitle = document.createElement('div');
+        // set the event title to the event title from the database
+        eventTitle.innerText = val[i].event_title;
+        // add the event div to the events div of that day
+        eventDiv.appendChild(eventTitle);
+        document.getElementById(eventStart).appendChild(eventDiv);
+    }
+});

@@ -4,11 +4,12 @@ const mysql = require('mysql')
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const session = require('express-session');
-//const fetch = require('node-fetch');
+const app = express();
+
 
 dotenv.config();
 
-const app = express();
+
 
 const port = process.env.PORT || 8100;
 
@@ -141,7 +142,7 @@ app.post("/api/events", (req,res) => {
     if(err) throw err;
     console.log("Event added");
   })
-  res.send('back')
+  res.redirect('back')
 });
 
 app.post('/api/logout', (req, res) => {

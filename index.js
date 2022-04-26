@@ -63,7 +63,7 @@ app.get('/month', redirectLogin, (req,res) =>{
 });
 
 
-app.get('/monthData', redirectLogin, (req,res) =>{
+app.get('/EventsData', redirectLogin, (req,res) =>{
   var sql = `SELECT * FROM events WHERE user_name = '${req.session.username}';`
   con.query(sql, function (err, result) {
     if (err) throw err;
@@ -149,7 +149,7 @@ app.post("/api/login", (req,res) => {
 app.post("/api/events", (req,res) => {
   //need to add event title to database? Also haven't figured out the colors or events yet so not added
   var sql = `INSERT INTO events (event_title, user_name, eventStart, eventEnd, eventLocation, eventDescription, reminderTime, eventColor)
-  VALUES ("${req.body.title}","${req.session.username}", "${req.body.start}", "${req.body.end}", "${req.body.location}", "${req.body.description}", "", "")`
+  VALUES ("${req.body.title}","${req.session.username}", "${req.body.start}", "${req.body.end}", "${req.body.location}", "${req.body.description}", "${req.body.start}", "")`
   con.query(sql, function (err, result) {
     if(err) throw err;
     console.log("Event added");

@@ -64,7 +64,7 @@ app.get('/month', redirectLogin, (req,res) =>{
 
 
 app.get('/monthData', redirectLogin, (req,res) =>{
-  var sql = `SELECT * FROM EVENTS WHERE user_name = '${req.session.username}';`
+  var sql = `SELECT * FROM events WHERE user_name = '${req.session.username}';`
   con.query(sql, function (err, result) {
     if (err) throw err;
     
@@ -74,8 +74,20 @@ app.get('/monthData', redirectLogin, (req,res) =>{
    }});
 });
 
-app.get('/day', (req,res) =>{
+app.get('/day',  redirectLogin, (req,res) =>{
   res.sendFile('/public_html/day.html',{root:__dirname})
+});
+
+app.get('/week',  redirectLogin, (req,res) =>{
+  res.sendFile('/public_html/week.html',{root:__dirname})
+});
+
+app.get('/year',  redirectLogin, (req,res) =>{
+  res.sendFile('/public_html/year.html',{root:__dirname})
+});
+
+app.get('/schedule',  redirectLogin, (req,res) =>{
+  res.sendFile('/public_html/schedule.html',{root:__dirname})
 });
 
 //inserts user into the database

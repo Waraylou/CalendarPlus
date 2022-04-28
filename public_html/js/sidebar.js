@@ -120,7 +120,7 @@ function initializeCreate() {
 
             // Label for all day checkbox
             const allDayLabel = document.createElement('label');
-            allDayLabel.className = 'allday';
+            allDayLabel.className = 'reminder';
             allDayLabel.innerText = 'Remind Me';
 
                 // Checkbox element

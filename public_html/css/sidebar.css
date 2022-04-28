@@ -96,7 +96,7 @@ input:focus {
 }
 
 /* For Checkbox */
-.allday {
+.reminder {
     display: flex;
     position: relative;
     padding-left: 35px;
@@ -110,7 +110,7 @@ input:focus {
 }
 
 /* Hide the browser's default checkbox */
-.allday input {
+.reminder input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -130,20 +130,20 @@ input:focus {
 }
 
 /* On mouse-over, add a grey background color */
-.allday:hover input ~ .checkmark {
+.reminder:hover input ~ .checkmark {
     background-color: var(--clr-neutral-600);
 }
 
 /* When the checkbox is checked, add a blue background */
-.allday input:checked ~ .checkmark {
+.reminder input:checked ~ .checkmark {
     background-color: var(--clr-primary-100);
 }
 
-.allday:hover input:checked ~ .checkmark {
+.reminder:hover input:checked ~ .checkmark {
     outline: var(--input-outline);
 }
 
-.allday:hover input ~ .checkmark {
+.reminder:hover input ~ .checkmark {
     outline: var(--input-outline);
 }
 
@@ -160,12 +160,12 @@ input[type=checkbox]:focus:checked ~ .checkmark {
 }
 
 /* Show the checkmark when checked */
-.allday input:checked ~ .checkmark:after {
+.reminder input:checked ~ .checkmark:after {
     display: block;
 }
 
 /* Style the checkmark/indicator */
-.allday .checkmark:after {
+.reminder .checkmark:after {
     padding: 0;
     left: 10px;
     top: 6px;

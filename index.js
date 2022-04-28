@@ -10,7 +10,6 @@ const app = express();
 dotenv.config();
 
 
-
 const port = process.env.PORT || 8100;
 
 // creates a value to represent one day's time in milliseconds 
@@ -20,9 +19,9 @@ const oneDay = 1000 * 60 * 60 * 24;
 
 var con = mysql.createConnection({
 host: "localhost",
-user: "calendar",
-password: "projectPlus2022",
-database: "calendar"
+user: process.env.DB_USER,
+password: process.env.DB_PASSWORD,
+database: process.env.DB
 });
 
 

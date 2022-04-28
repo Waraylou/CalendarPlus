@@ -75,7 +75,7 @@ initButtons();
 load();
 
 async function getMonthData(){
-    let response = await fetch('/monthData')
+    let response = await fetch('/EventsData')
     .then(response => response.json())
     .then(data =>  {return data })
     

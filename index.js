@@ -92,7 +92,19 @@ app.get('/schedule',  redirectLogin, (req,res) =>{
 
 //inserts user into the database
 app.post("/api/user", (req,res) => {
-  var sql = `INSERT INTO users VALUES ('${req.body.username}', '${req.body.password}', '${req.body.email}')`
+  var sql = `SELECT * FROM users WHERE user_name = '${req.body.username}'`
+  con.query(sql, function (err, result) {
+    if (err){
+      console.log("1 record inserted")
+      throw err;
+    }
+    if(result.length > 0){
+      console.log("USER EXISTS");
+      res.redirect("/")
+    }
+    else{
+    
+  sql = `INSERT INTO users VALUES ('${req.body.username}', '${req.body.password}', '${req.body.email}')`
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("1 record inserted")
@@ -109,7 +121,10 @@ app.post("/api/user", (req,res) => {
   req.session.loggedin = true;
   req.session.username = req.body.username;
 
-  res.redirect("/month");
+  res.redirect("/month");      
+    }
+    });
+
 });
       
 // queries the database and if credntials match those in the database, the user will be redirected to the month page

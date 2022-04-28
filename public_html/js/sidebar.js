@@ -98,6 +98,8 @@ function initializeCreate() {
             // Field for start time
             const startTime = document.createElement('input');
             startTime.type = 'datetime-local';
+            // set the default value to the current time
+            startTime.value = new Date().toISOString().split('T')[0] + 'T' + new Date().toTimeString().split(' ')[0].split(':')[0] + ':00';
             formFields.appendChild(startTime);
             startTime.name = "start";
             startTime.id = "start";
@@ -110,6 +112,8 @@ function initializeCreate() {
             // Field for end time
             const endTime = document.createElement('input');
             endTime.type = 'datetime-local';
+            // set the default value to the current time, without seconds
+            endTime.value = new Date().toISOString().split('T')[0] + 'T' + new Date().toTimeString().split(' ')[0].split(':')[0] + ':00';
             formFields.appendChild(endTime);
             endTime.name = "end";
             endTime.id = "end";
@@ -117,7 +121,7 @@ function initializeCreate() {
             // Label for all day checkbox
             const allDayLabel = document.createElement('label');
             allDayLabel.className = 'allday';
-            allDayLabel.innerText = 'All Day'
+            allDayLabel.innerText = 'Remind Me';
 
                 // Checkbox element
                 const allDay = document.createElement('input');

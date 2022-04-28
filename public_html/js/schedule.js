@@ -26,16 +26,8 @@ function load(year = y) {
 
     // Get the dayDisplay DOM element
     const yearDisplay = document.getElementById('yearDisplay');
-    // Set the innerText of the dayDisplay DOM element to the current month, day, and year
-    yearDisplay.innerText = `${dt.toLocaleDateString('en-us', {month: 'long'})} ${day}, ${year}`;
-
-    // Create a DOM element that contains the weekday for the current date
-    const weekday = document.createElement('h3');
-    weekday.classList.add('weekday');
-    weekday.classList.add('cell');
-    weekday.innerText = dt.toLocaleDateString('en-us', {weekday: 'long'});
-    calendar.append(weekday);
-
+    // Set the innerText of the dayDisplay DOM element to the current year
+    yearDisplay.innerText = `${year}`;
 }
 
 function initButtons() {
@@ -61,7 +53,7 @@ initButtons();
 load();
 
 async function getMonthData(){
-    let response = await fetch('/monthData')
+    let response = await fetch('/EventsData')
     .then(response => response.json())
     .then(data =>  {return data })
     
@@ -71,26 +63,55 @@ async function getMonthData(){
 let monthData = getMonthData()
 monthData.then(val => {
     for (let i = 0; i < val.length; i++) {
+        console.log(val[i]);
         // convert val[0].eventStart to a date object
         let startDate = new Date(val[i].eventStart);
-        // get the day month and year from the date object
-        let eventStart = `${startDate.getMonth() + 1}-${startDate.getDate()}-${startDate.getFullYear()}`;
+
         // convert val[0].eventEnd to a date object
         let endDate = new Date(val[i].eventEnd);
-        // get the day month and year from the date object
-        let eventEnd = `${endDate.getMonth() + 1}-${endDate.getDate()}-${endDate.getFullYear()}`;
-        // if the event div exists, add the event to the div
-        if (document.getElementById(eventStart)) {
-            // create a div element to hold the event
-            let eventDiv = document.createElement('div');
-            eventDiv.classList.add('event');
-            // create a div element to hold the event title
-            let eventTitle = document.createElement('div');
-            // set the event title to the event title from the database
-            eventTitle.innerText = val[i].event_title;
-            // add the event div to the events div of that day
-            eventDiv.appendChild(eventTitle);
-            document.getElementById(eventStart).appendChild(eventDiv);
-        }
+
+        // create a new div for the event
+        let eventDiv = document.createElement('div');
+        eventDiv.classList.add('event');
+        eventDiv.id = val[i].event_id;
+
+        // create a new div for the date of the event
+        let dateDiv = document.createElement('div');
+        dateDiv.classList.add('date');
+        dateDiv.innerText = `${startDate.getMonth() + 1}/${startDate.getDate()}`;
+        eventDiv.append(dateDiv);
+
+        // create a new div for the abbreviated weekday of the event
+        let eventWeekday = document.createElement('div');
+        eventWeekday.classList.add('eventWeekday');
+        eventWeekday.innerText = startDate.toLocaleDateString('en-us', {weekday: 'short'});
+        eventDiv.append(eventWeekday);
+
+        // create a new div for the event start time
+        let eventStart = document.createElement('div');
+        eventStart.classList.add('eventStart');
+        eventStart.innerText = startDate.toLocaleTimeString('en-us', {hour: 'numeric', minute: 'numeric'});
+        eventDiv.append(eventStart);
+
+        // create a new div for the event end time
+        let eventEnd = document.createElement('div');
+        eventEnd.classList.add('eventEnd');
+        eventEnd.innerText = endDate.toLocaleTimeString('en-us', {hour: 'numeric', minute: 'numeric'});
+        eventDiv.append(eventEnd);
+
+        // create a new div for the event title
+        let eventTitle = document.createElement('div');
+        eventTitle.classList.add('eventTitle');
+        eventTitle.innerText = val[i].event_title;
+        eventDiv.append(eventTitle);
+
+        let eventEditButton = document.createElement('button');
+        eventEditButton.classList.add('eventEditButton');
+        eventEditButton.id = val[i].event_id;
+        eventEditButton.innerText = '\u22EE';
+        eventDiv.append(eventEditButton);
+
+        // append the event div to the calendar
+        calendar.append(eventDiv);
     }
 });

@@ -16,6 +16,11 @@
     width: 100%;
 }
 
+h2[id=yearDisplay] {
+    text-align: center;
+    flex-basis: 70%;
+}
+
 .weekdays {
     display: flex;
     flex-basis: 100%;
@@ -30,7 +35,7 @@
     flex-basis: 100%;
     flex-direction: row;
     margin-left: 20rem;
-    height: calc(100vh - 6rem);
+    align-content: flex-start;
 }
 
 .row {
@@ -64,10 +69,7 @@
 }
 
 .date {
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    transition: background-color 0.2s;
+    width: 3rem;
 }
 
 .date div:hover:not(.selected) {
@@ -76,9 +78,48 @@
 }
 
 .padding {
-    color: var(--clr-neutral-300);
+    color: var(--clr-neutral-250);
 }
 
 .selected {
-    background-color: var(--clr-primary-400);
+    outline: 3px solid var(--clr-primary-100);
+    outline-offset: 4px;
+    border-radius: 50%;
+}
+
+.event {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-basis: 100%;
+    border-bottom: 1px solid var(--clr-neutral-700);
+    align-items: center;
+    height: 5rem;
+    padding-left: 1.5rem;
+}
+
+.eventWeekday {
+    flex-basis: 3rem;
+}
+
+.eventStart, .eventEnd {
+    flex-basis: 5rem;
+}
+
+.eventTitle {
+    flex-basis: 20rem;
+}
+
+.eventEditButton {
+    flex-basis: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: var(--clr-neutral-700);
+    font-size: 2rem;
+    margin-right: 20px;
+    margin-left: auto;
+}
+
+.sidebar {
+    border-right: 1px solid var(--clr-neutral-700);
 }

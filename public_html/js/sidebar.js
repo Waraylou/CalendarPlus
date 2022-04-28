@@ -275,6 +275,13 @@ function initializeEdit(eventId) {
             descriptionField.value = val[i].eventDescription;
             formFields.appendChild(descriptionField);
 
+            // create a hidden input field to hold the event id
+            const eventIdField = document.createElement('input');
+            eventIdField.type = 'hidden';
+            eventIdField.name = 'event_id';
+            eventIdField.value = val[i].event_id;
+            formFields.appendChild(eventIdField);
+
         createForm.appendChild(formFields);
         
         // Container for form buttons

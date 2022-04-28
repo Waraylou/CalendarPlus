@@ -170,6 +170,16 @@ app.post("/updateEvent", (req, res) => {
   res.redirect('/month')
 });
 
+app.post("/deleteEvent", (req, res) => {
+  var sql = `DELETE FROM events WHERE event_id = "${req.body.event_id}";`
+  
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("Event added");
+  })
+  res.redirect('/month')
+});
+
 app.post('/api/logout', (req, res) => {
   req.session.destroy();
   console.log(req.session)

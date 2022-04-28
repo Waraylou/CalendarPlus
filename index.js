@@ -16,18 +16,17 @@ const port = process.env.PORT || 8100;
 const oneDay = 1000 * 60 * 60 * 24;
 
 
-
 var con = mysql.createConnection({
-host: "localhost",
-user: process.env.DB_USER,
-password: process.env.DB_PASSWORD,
-database: process.env.DB
+  host: "localhost",
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB
 });
 
 
-con.connect(function(err) {
-  if(err){
-      return console.error("error: " + err.message)
+con.connect(function (err) {
+  if (err) {
+    return console.error("error: " + err.message)
   }
   console.log("CONNECTION MADE WITH SQL SERVER!")
 });
@@ -35,7 +34,7 @@ con.connect(function(err) {
 
 app.use(session({
   secret: 'secret',
-  cookie: {maxAge: oneDay }, 
+  cookie: { maxAge: oneDay },
   resave: true,
   saveUninitialized: true
 }));
@@ -43,103 +42,103 @@ app.use(session({
 
 app.use(express.static(__dirname + '/public_html'))
 app.use(morgan('dev'))
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-const redirectLogin = (req,res,next) => {
-  if(!req.session.username){
+const redirectLogin = (req, res, next) => {
+  if (!req.session.username) {
     res.redirect('/')
-  }else{
+  } else {
     next()
   }
 };
 
 
-app.get('/month', redirectLogin, (req,res) =>{
-  
-  res.sendFile('/public_html/month.html',{root:__dirname})
+app.get('/month', redirectLogin, (req, res) => {
+
+  res.sendFile('/public_html/month.html', { root: __dirname })
 
 });
 
 
-app.get('/EventsData', redirectLogin, (req,res) =>{
+app.get('/EventsData', redirectLogin, (req, res) => {
   var sql = `SELECT * FROM events WHERE user_name = '${req.session.username}';`
   con.query(sql, function (err, result) {
     if (err) throw err;
-    
-    else{
+
+    else {
       //console.log(result)
       res.send(result)
-   }});
+    }
+  });
 });
 
-app.get('/day',  redirectLogin, (req,res) =>{
-  res.sendFile('/public_html/day.html',{root:__dirname})
+app.get('/day', redirectLogin, (req, res) => {
+  res.sendFile('/public_html/day.html', { root: __dirname })
 });
 
-app.get('/week',  redirectLogin, (req,res) =>{
-  res.sendFile('/public_html/week.html',{root:__dirname})
+app.get('/week', redirectLogin, (req, res) => {
+  res.sendFile('/public_html/week.html', { root: __dirname })
 });
 
-app.get('/year',  redirectLogin, (req,res) =>{
-  res.sendFile('/public_html/year.html',{root:__dirname})
+app.get('/year', redirectLogin, (req, res) => {
+  res.sendFile('/public_html/year.html', { root: __dirname })
 });
 
-app.get('/schedule',  redirectLogin, (req,res) =>{
-  res.sendFile('/public_html/schedule.html',{root:__dirname})
+app.get('/schedule', redirectLogin, (req, res) => {
+  res.sendFile('/public_html/schedule.html', { root: __dirname })
 });
 
 //inserts user into the database
-app.post("/api/user", (req,res) => {
+app.post("/api/user", (req, res) => {
   var sql = `SELECT * FROM users WHERE user_name = '${req.body.username}'`
   con.query(sql, function (err, result) {
-    if (err){
+    if (err) {
       console.log("1 record inserted")
       throw err;
     }
-    if(result.length > 0){
+    if (result.length > 0) {
       console.log("USER EXISTS");
       res.redirect("/")
     }
-    else{
-    
-  sql = `INSERT INTO users VALUES ('${req.body.username}', '${req.body.password}', '${req.body.email}')`
-  con.query(sql, function (err, result) {
-    if (err) throw err;
-    console.log("1 record inserted")
- 
-    });
+    else {
+      sql = `INSERT INTO users VALUES ('${req.body.username}', '${req.body.password}', '${req.body.email}')`
+      con.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log("1 record inserted")
 
-  // con.end(function(err) {
-  //   if (err) {
-  //     return console.log('error:' + err.message);
-  //   }
-  //   console.log('Closed the database connection.');
-  // });
+      });
 
-  req.session.loggedin = true;
-  req.session.username = req.body.username;
+      // con.end(function(err) {
+      //   if (err) {
+      //     return console.log('error:' + err.message);
+      //   }
+      //   console.log('Closed the database connection.');
+      // });
 
-  res.redirect("/month");      
+      req.session.loggedin = true;
+      req.session.username = req.body.username;
+
+      res.redirect("/month");
     }
-    });
+  });
 
 });
-      
+
 // queries the database and if credntials match those in the database, the user will be redirected to the month page
 // if the user fails to match the credentials in the database an error will appear
-app.post("/api/login", (req,res) => {
+app.post("/api/login", (req, res) => {
   var username = req.body.username;
   var password = req.body.password;
 
-  if(username && password){
+  if (username && password) {
     var sql = `SELECT * FROM users WHERE user_name = '${username}' AND password = '${password}'`;
-    con.query(sql, function(err, results, fields){
+    con.query(sql, function (err, results, fields) {
       if (err) {
         console.log('error:' + err.message);
         throw err;
       }
-      if(results.length > 0){
+      if (results.length > 0) {
         req.session.loggedin = true;
         req.session.username = username;
 
@@ -153,19 +152,38 @@ app.post("/api/login", (req,res) => {
           </script>`);
       }
       res.end();
-    }); 
-  } else{
+    });
+  } else {
     res.end();
   }
 });
 
+
+app.post("/updateEvent", (req, res) => {
+  //need to add event title to database? Also haven't figured out the colors or events yet so not added
+  var sql = `UPDATE events SET event_title = "${req.body.title}", user_name = "${req.session.username}", eventStart "${req.body.start}", eventEnd = "${req.body.end}",
+   eventLocation = "${req.body.location}", eventDescription "${req.body.description}", reminderTime = "${req.body.start}", eventColor = "")`
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("Event added");
+  })
+  res.redirect('/month')
+});
+
+app.post('/api/logout', (req, res) => {
+  req.session.destroy();
+  console.log(req.session)
+  res.redirect('/')
+})
+ 
+
 // inserts events into the database
-app.post("/api/events", (req,res) => {
+app.post("/api/events", (req, res) => {
   //need to add event title to database? Also haven't figured out the colors or events yet so not added
   var sql = `INSERT INTO events (event_title, user_name, eventStart, eventEnd, eventLocation, eventDescription, reminderTime, eventColor)
   VALUES ("${req.body.title}","${req.session.username}", "${req.body.start}", "${req.body.end}", "${req.body.location}", "${req.body.description}", "${req.body.start}", "")`
   con.query(sql, function (err, result) {
-    if(err) throw err;
+    if (err) throw err;
     console.log("Event added");
   })
   res.redirect('back')

@@ -22,7 +22,7 @@ function initializeMain() {
     sidebarCalendar.className = 'sidebar-calendar';
     initializeSidebarCalendar(sidebarCalendar);
     mainSidebar.appendChild(sidebarCalendar);
-    
+
     main.appendChild(mainSidebar);
 }
 
@@ -32,7 +32,7 @@ function initializeSidebarCalendar(calendar) {
     if (sidebarNav !== 0) {
         dt.setMonth(new Date().getMonth() + sidebarNav);
     }
-    
+
     day = dt.getDate();
     month = dt.getMonth();
     year = dt.getFullYear();
@@ -53,9 +53,9 @@ function initializeSidebarCalendar(calendar) {
 
     const displayViewed = document.createElement('h3');
     displayViewed.id = 'sidebar-display-viewed';
-    displayViewed.innerText = `${dt.toLocaleDateString('en-us', {month: 'long'})} ${year}`;
+    displayViewed.innerText = `${dt.toLocaleDateString('en-us', { month: 'long' })} ${year}`;
     calendar.appendChild(displayViewed);
-    
+
     renderDaysOfWeek(calendar);
 
     renderStartPadding(calendar, paddingDays, lastDayPrevMonth);
@@ -78,102 +78,102 @@ function initializeCreate() {
     createForm.method = 'POST'
     createForm.action = '/api/events'
 
-        // Container for form fields
-        const formFields = document.createElement('div');
-        formFields.className = 'formFields';
+    // Container for form fields
+    const formFields = document.createElement('div');
+    formFields.className = 'formFields';
 
-            // Field for event name
-            const titleField = document.createElement('input');
-            titleField.type = 'text';
-            titleField.id = 'title';
-            titleField.name = 'title';
-            titleField.placeholder = 'Title';
-            formFields.appendChild(titleField);
-            
-            // Label for start time field
-            const startLabel = document.createElement('label');
-            startLabel.innerText = 'Start Time';
-            formFields.appendChild(startLabel);
+    // Field for event name
+    const titleField = document.createElement('input');
+    titleField.type = 'text';
+    titleField.id = 'title';
+    titleField.name = 'title';
+    titleField.placeholder = 'Title';
+    formFields.appendChild(titleField);
 
-            // Field for start time
-            const startTime = document.createElement('input');
-            startTime.type = 'datetime-local';
-            // set the default value to the current time
-            startTime.value = new Date().toISOString().split('T')[0] + 'T' + new Date().toTimeString().split(' ')[0].split(':')[0] + ':00';
-            formFields.appendChild(startTime);
-            startTime.name = "start";
-            startTime.id = "start";
+    // Label for start time field
+    const startLabel = document.createElement('label');
+    startLabel.innerText = 'Start Time';
+    formFields.appendChild(startLabel);
 
-            // Label for end time field
-            const endLabel = document.createElement('label');
-            endLabel.innerText = 'End Time';
-            formFields.appendChild(endLabel);
+    // Field for start time
+    const startTime = document.createElement('input');
+    startTime.type = 'datetime-local';
+    // set the default value to the current time
+    startTime.value = new Date().toISOString().split('T')[0] + 'T' + new Date().toTimeString().split(' ')[0].split(':')[0] + ':00';
+    formFields.appendChild(startTime);
+    startTime.name = "start";
+    startTime.id = "start";
 
-            // Field for end time
-            const endTime = document.createElement('input');
-            endTime.type = 'datetime-local';
-            // set the default value to the current time, without seconds
-            endTime.value = new Date().toISOString().split('T')[0] + 'T' + new Date().toTimeString().split(' ')[0].split(':')[0] + ':00';
-            formFields.appendChild(endTime);
-            endTime.name = "end";
-            endTime.id = "end";
+    // Label for end time field
+    const endLabel = document.createElement('label');
+    endLabel.innerText = 'End Time';
+    formFields.appendChild(endLabel);
 
-            // Label for all day checkbox
-            const allDayLabel = document.createElement('label');
-            allDayLabel.className = 'reminder';
-            allDayLabel.innerText = 'Remind Me';
+    // Field for end time
+    const endTime = document.createElement('input');
+    endTime.type = 'datetime-local';
+    // set the default value to the current time, without seconds
+    endTime.value = new Date().toISOString().split('T')[0] + 'T' + new Date().toTimeString().split(' ')[0].split(':')[0] + ':00';
+    formFields.appendChild(endTime);
+    endTime.name = "end";
+    endTime.id = "end";
 
-                // Checkbox element
-                const allDay = document.createElement('input');
-                allDay.type = 'checkbox';
-                allDayLabel.appendChild(allDay);
+    // Label for all day checkbox
+    const allDayLabel = document.createElement('label');
+    allDayLabel.className = 'reminder';
+    allDayLabel.innerText = 'Remind Me';
 
-                // Element for custom checkbox (replaces default visually)
-                const checkmark = document.createElement('span');
-                checkmark.className = 'checkmark';
-                allDayLabel.appendChild(checkmark);
+    // Checkbox element
+    const allDay = document.createElement('input');
+    allDay.type = 'checkbox';
+    allDayLabel.appendChild(allDay);
 
-            formFields.appendChild(allDayLabel);
+    // Element for custom checkbox (replaces default visually)
+    const checkmark = document.createElement('span');
+    checkmark.className = 'checkmark';
+    allDayLabel.appendChild(checkmark);
 
-            // Field for event location
-            const locationField = document.createElement('input');
-            locationField.type = 'text';
-            locationField.id = 'location';
-            locationField.name = 'location';
-            locationField.placeholder = 'Location';
-            formFields.appendChild(locationField);
+    formFields.appendChild(allDayLabel);
 
-            // Field for event description
-            const descriptionField = document.createElement('textarea');
-            descriptionField.id = 'description';
-            descriptionField.name = 'description';
-            descriptionField.placeholder = 'Description';
-            formFields.appendChild(descriptionField);
+    // Field for event location
+    const locationField = document.createElement('input');
+    locationField.type = 'text';
+    locationField.id = 'location';
+    locationField.name = 'location';
+    locationField.placeholder = 'Location';
+    formFields.appendChild(locationField);
 
-        createForm.appendChild(formFields);
-        
-        // Container for form buttons
-        const formButtons = document.createElement('div');
-        formButtons.className = 'formButtons';
+    // Field for event description
+    const descriptionField = document.createElement('textarea');
+    descriptionField.id = 'description';
+    descriptionField.name = 'description';
+    descriptionField.placeholder = 'Description';
+    formFields.appendChild(descriptionField);
 
-            // Back button (returns user to main sidebar)
-            const backButton = document.createElement('button');
-            backButton.type = 'button';
-            backButton.id = 'back';
-            backButton.innerText = 'Back';
-            backButton.addEventListener('click', () => {
-                clearSidebar();
-                initializeMain();
-            });
-            formButtons.appendChild(backButton);
+    createForm.appendChild(formFields);
 
-            // Save button (saves event)
-            const saveButton = document.createElement('button');
-            saveButton.id = 'save';
-            saveButton.innerText = 'Save';
-            formButtons.appendChild(saveButton);
+    // Container for form buttons
+    const formButtons = document.createElement('div');
+    formButtons.className = 'formButtons';
 
-        createForm.appendChild(formButtons);
+    // Back button (returns user to main sidebar)
+    const backButton = document.createElement('button');
+    backButton.type = 'button';
+    backButton.id = 'back';
+    backButton.innerText = 'Back';
+    backButton.addEventListener('click', () => {
+        clearSidebar();
+        initializeMain();
+    });
+    formButtons.appendChild(backButton);
+
+    // Save button (saves event)
+    const saveButton = document.createElement('button');
+    saveButton.id = 'save';
+    saveButton.innerText = 'Save';
+    formButtons.appendChild(saveButton);
+
+    createForm.appendChild(formButtons);
 
     main.appendChild(createForm);
 }
@@ -189,59 +189,59 @@ function initializeEdit(eventId) {
                 const createForm = document.createElement('form');
                 createForm.id = 'manageEvent';
                 createForm.method = 'POST'
-                createForm.action = '/api/events'
+                createForm.action = '/api/updateEvent'
 
                 // Container for form fields
                 const formFields = document.createElement('div');
                 formFields.className = 'formFields';
 
-            // Field for event name
-            const titleField = document.createElement('input');
-            // set the field to readonly
-            titleField.readOnly = true;
-            titleField.type = 'text';
-            titleField.id = 'title';
-            titleField.name = 'title';
-            titleField.placeholder = 'Title';
-            titleField.value = val[i].event_title;
-            formFields.appendChild(titleField);
-            
-            // Label for start time field
-            const startLabel = document.createElement('label');
-            startLabel.innerText = 'Start Time';
-            formFields.appendChild(startLabel);
+                // Field for event name
+                const titleField = document.createElement('input');
+                // set the field to readonly
+                titleField.readOnly = true;
+                titleField.type = 'text';
+                titleField.id = 'title';
+                titleField.name = 'title';
+                titleField.placeholder = 'Title';
+                titleField.value = val[i].event_title;
+                formFields.appendChild(titleField);
 
-            // Field for start time
-            const startTime = document.createElement('input');
-            startTime.readOnly = true;
-            startTime.type = 'datetime-local';
-            // set the default value to the current time
-            let startDate = new Date(val[i].eventStart);
-            startTime.value = startDate.toISOString().split('T')[0] + 'T' +startDate.toTimeString().split(' ')[0];
-            formFields.appendChild(startTime);
-            startTime.name = "start";
-            startTime.id = "start";
+                // Label for start time field
+                const startLabel = document.createElement('label');
+                startLabel.innerText = 'Start Time';
+                formFields.appendChild(startLabel);
 
-            // Label for end time field
-            const endLabel = document.createElement('label');
-            endLabel.innerText = 'End Time';
-            formFields.appendChild(endLabel);
+                // Field for start time
+                const startTime = document.createElement('input');
+                startTime.readOnly = true;
+                startTime.type = 'datetime-local';
+                // set the default value to the current time
+                let startDate = new Date(val[i].eventStart);
+                startTime.value = startDate.toISOString().split('T')[0] + 'T' + startDate.toTimeString().split(' ')[0];
+                formFields.appendChild(startTime);
+                startTime.name = "start";
+                startTime.id = "start";
 
-            // Field for end time
-            const endTime = document.createElement('input');
-            endTime.readOnly = true;
-            endTime.type = 'datetime-local';
-            // set the default value to the current time, without seconds
-            let endDate = new Date(val[i].eventEnd);
-            endTime.value = endDate.toISOString().split('T')[0] + 'T' + endDate.toTimeString().split(' ')[0];
-            formFields.appendChild(endTime);
-            endTime.name = "end";
-            endTime.id = "end";
+                // Label for end time field
+                const endLabel = document.createElement('label');
+                endLabel.innerText = 'End Time';
+                formFields.appendChild(endLabel);
 
-            // Label for all day checkbox
-            const allDayLabel = document.createElement('label');
-            allDayLabel.className = 'reminder';
-            allDayLabel.innerText = 'Remind Me';
+                // Field for end time
+                const endTime = document.createElement('input');
+                endTime.readOnly = true;
+                endTime.type = 'datetime-local';
+                // set the default value to the current time, without seconds
+                let endDate = new Date(val[i].eventEnd);
+                endTime.value = endDate.toISOString().split('T')[0] + 'T' + endDate.toTimeString().split(' ')[0];
+                formFields.appendChild(endTime);
+                endTime.name = "end";
+                endTime.id = "end";
+
+                // Label for all day checkbox
+                const allDayLabel = document.createElement('label');
+                allDayLabel.className = 'reminder';
+                allDayLabel.innerText = 'Remind Me';
 
                 // Checkbox element
                 const allDay = document.createElement('input');
@@ -254,70 +254,70 @@ function initializeEdit(eventId) {
                 checkmark.className = 'checkmark';
                 allDayLabel.appendChild(checkmark);
 
-            formFields.appendChild(allDayLabel);
+                formFields.appendChild(allDayLabel);
 
-            // Field for event location
-            const locationField = document.createElement('input');
-            locationField.readOnly = true;
-            locationField.type = 'text';
-            locationField.id = 'location';
-            locationField.name = 'location';
-            locationField.placeholder = 'Location';
-            locationField.value = val[i].eventLocation;
-            formFields.appendChild(locationField);
+                // Field for event location
+                const locationField = document.createElement('input');
+                locationField.readOnly = true;
+                locationField.type = 'text';
+                locationField.id = 'location';
+                locationField.name = 'location';
+                locationField.placeholder = 'Location';
+                locationField.value = val[i].eventLocation;
+                formFields.appendChild(locationField);
 
-            // Field for event description
-            const descriptionField = document.createElement('textarea');
-            descriptionField.readOnly = true;
-            descriptionField.id = 'description';
-            descriptionField.name = 'description';
-            descriptionField.placeholder = 'Description';
-            descriptionField.value = val[i].eventDescription;
-            formFields.appendChild(descriptionField);
+                // Field for event description
+                const descriptionField = document.createElement('textarea');
+                descriptionField.readOnly = true;
+                descriptionField.id = 'description';
+                descriptionField.name = 'description';
+                descriptionField.placeholder = 'Description';
+                descriptionField.value = val[i].eventDescription;
+                formFields.appendChild(descriptionField);
 
-            // create a hidden input field to hold the event id
-            const eventIdField = document.createElement('input');
-            eventIdField.type = 'hidden';
-            eventIdField.name = 'event_id';
-            eventIdField.value = val[i].event_id;
-            formFields.appendChild(eventIdField);
+                // create a hidden input field to hold the event id
+                const eventIdField = document.createElement('input');
+                eventIdField.type = 'hidden';
+                eventIdField.name = 'event_id';
+                eventIdField.value = val[i].event_id;
+                formFields.appendChild(eventIdField);
 
-        createForm.appendChild(formFields);
-        
-        // Container for form buttons
-        const formButtons = document.createElement('div');
-        formButtons.className = 'formButtons';
+                createForm.appendChild(formFields);
 
-            // Back button (returns user to main sidebar)
-            const backButton = document.createElement('button');
-            backButton.type = 'button';
-            backButton.id = 'back';
-            backButton.innerText = 'Back';
-            backButton.addEventListener('click', () => {
-                clearSidebar();
-                initializeMain();
-            });
-            formButtons.appendChild(backButton);
+                // Container for form buttons
+                const formButtons = document.createElement('div');
+                formButtons.className = 'formButtons';
 
-            // Delete button (deletes event)
-            const deleteButton = document.createElement('button');
-            deleteButton.id = 'delete';
-            deleteButton.innerText = 'Delete';
-            formButtons.appendChild(deleteButton);
+                // Back button (returns user to main sidebar)
+                const backButton = document.createElement('button');
+                backButton.type = 'button';
+                backButton.id = 'back';
+                backButton.innerText = 'Back';
+                backButton.addEventListener('click', () => {
+                    clearSidebar();
+                    initializeMain();
+                });
+                formButtons.appendChild(backButton);
 
-            // Edit button (edits event)
-            const editButton = document.createElement('button');
-            editButton.id = 'edit';
-            editButton.innerText = 'Edit';
-            formButtons.appendChild(editButton);
+                // Delete button (deletes event)
+                const deleteButton = document.createElement('button');
+                deleteButton.id = 'delete';
+                deleteButton.innerText = 'Delete';
+                formButtons.appendChild(deleteButton);
 
-        createForm.appendChild(formButtons);
+                // Edit button (edits event)
+                const editButton = document.createElement('button');
+                editButton.id = 'edit';
+                editButton.innerText = 'Edit';
+                formButtons.appendChild(editButton);
 
-        main.appendChild(createForm);
+                createForm.appendChild(formButtons);
+
+                main.appendChild(createForm);
             }
         }
     });
-    
+
 }
 
 /* When the user clicks on the button,
@@ -327,7 +327,7 @@ function myFunction() {
 }
 
 // Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
+window.onclick = function (event) {
     if (!event.target.matches('.dropbtn')) {
         var dropdowns = document.getElementsByClassName("dropdown-content");
         var i;
@@ -342,11 +342,11 @@ window.onclick = function(event) {
 
 initializeMain();
 
-async function getMonthData(){
+async function getMonthData() {
     let response = await fetch('/EventsData')
-    .then(response => response.json())
-    .then(data =>  {return data })
-    
+        .then(response => response.json())
+        .then(data => { return data })
+
     return response;
-    
+
 }

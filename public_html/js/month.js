@@ -104,6 +104,11 @@ monthData.then(val => {
             eventTitle.innerText = val[i].event_title;
             // add the event div to the events div of that day
             eventDiv.appendChild(eventTitle);
+            // on clicking the event div, call initializeEdit(val[i].event_id)
+            eventDiv.addEventListener('click', () => {
+                clearSidebar();
+                initializeEdit(val[i].event_id);
+            })
             document.getElementById(eventStart).appendChild(eventDiv);
         }
     }

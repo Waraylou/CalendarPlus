@@ -52,7 +52,7 @@ function daysInMonth() {
 initButtons();
 load();
 
-async function getMonthData(){
+async function getEventsData(){
     let response = await fetch('/EventsData')
     .then(response => response.json())
     .then(data =>  {return data })
@@ -60,8 +60,8 @@ async function getMonthData(){
     return response;
     
 }
-let monthData = getMonthData()
-monthData.then(val => {
+let eventData = getEventsData()
+eventData.then(val => {
     for (let i = 0; i < val.length; i++) {
         console.log(val[i]);
         // convert val[0].eventStart to a date object
@@ -109,6 +109,11 @@ monthData.then(val => {
         eventEditButton.classList.add('eventEditButton');
         eventEditButton.id = val[i].event_id;
         eventEditButton.innerText = '\u22EE';
+        // on click, open the edit event modal
+        eventEditButton.addEventListener('click', () => {
+            clearSidebar();
+            initializeEdit(val[i].event_id);
+        });
         eventDiv.append(eventEditButton);
 
         // append the event div to the calendar

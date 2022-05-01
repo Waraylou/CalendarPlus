@@ -4,11 +4,20 @@ const mysql = require('mysql')
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const session = require('express-session');
+
+//for push notifcations
+const webpush = require("web-push");
+const path = require("path");
+
+//start of app
 const app = express();
+
+//for push notifcations
+app.use(express.static(path.join(__dirname, "client")));
+app.use(bodyParser.json());
 
 
 dotenv.config();
-
 
 const port = process.env.PORT || 8100;
 
@@ -53,10 +62,39 @@ const redirectLogin = (req, res, next) => {
   }
 };
 
+//vapid keys for notifcations
+const publicVapidKey = 'BCgJmeu9sb3HFPjJjR6TNjFzpOgRbN3B6v1re-X1hesVc4tTQurwFlpnMJmydy8Y0srsAioOW9hBrPphQYhfEFI';
+const privateVapidKey = 'VlH2vs-cV8CSf0lsAUwyslDpaUKrXVUunjXXc80PLgI';
 
-app.get('/month', redirectLogin, (req, res) => {
+webpush.setVapidDetails(
+  "mailto:test@mail.com",
+  publicVapidKey,
+  privateVapidKey
+);
 
-  res.sendFile('/public_html/month.html', { root: __dirname })
+// Subscribe Route
+app.post("/subscribe", (req, res) => {
+  // Get pushSubscription object
+  const subscription = req.body;
+
+  // Send 201 - resource created
+  res.status(201).json({});
+
+  // Create payload
+  const payload = JSON.stringify({ title: `Hello ${req.session.username}` });
+
+  // Pass object into sendNotification
+  webpush
+    .sendNotification(subscription, payload)
+    .catch(err => console.error(err));
+});
+
+//end push notifcation
+
+
+app.get('/month', redirectLogin, (req,res) =>{
+  
+  res.sendFile('/public_html/month.html',{root:__dirname})
 
 });
 

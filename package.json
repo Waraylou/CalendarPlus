@@ -11,7 +11,8 @@
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "node-fetch": "2.0",
-    "socket.io": "^4.4.1"
+    "socket.io": "^4.4.1",
+    "web-push": "^3.4.5"
   },
   "scripts": {
     "test": "nodemon index.js"

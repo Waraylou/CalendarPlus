@@ -22,7 +22,7 @@ function initializeMain() {
     sidebarCalendar.className = 'sidebar-calendar';
     initializeSidebarCalendar(sidebarCalendar);
     mainSidebar.appendChild(sidebarCalendar);
-    
+
     main.appendChild(mainSidebar);
 }
 
@@ -32,7 +32,7 @@ function initializeSidebarCalendar(calendar) {
     if (sidebarNav !== 0) {
         dt.setMonth(new Date().getMonth() + sidebarNav);
     }
-    
+
     day = dt.getDate();
     month = dt.getMonth();
     year = dt.getFullYear();
@@ -53,9 +53,9 @@ function initializeSidebarCalendar(calendar) {
 
     const displayViewed = document.createElement('h3');
     displayViewed.id = 'sidebar-display-viewed';
-    displayViewed.innerText = `${dt.toLocaleDateString('en-us', {month: 'long'})} ${year}`;
+    displayViewed.innerText = `${dt.toLocaleDateString('en-us', { month: 'long' })} ${year}`;
     calendar.appendChild(displayViewed);
-    
+
     renderDaysOfWeek(calendar);
 
     renderStartPadding(calendar, paddingDays, lastDayPrevMonth);
@@ -153,11 +153,11 @@ function initializeCreate() {
             descriptionField.placeholder = 'Description';
             formFields.appendChild(descriptionField);
 
-        createForm.appendChild(formFields);
-        
-        // Container for form buttons
-        const formButtons = document.createElement('div');
-        formButtons.className = 'formButtons';
+            createForm.appendChild(formFields);
+
+            // Container for form buttons
+            const formButtons = document.createElement('div');
+            formButtons.className = 'formButtons';
 
             // Back button (returns user to main sidebar)
             const backButton = document.createElement('button');
@@ -169,7 +169,6 @@ function initializeCreate() {
                 initializeMain();
             });
             formButtons.appendChild(backButton);
-
             // Save button (saves event)
             const saveButton = document.createElement('button');
             saveButton.id = 'save';
@@ -192,18 +191,11 @@ function initializeEdit(eventId) {
                 const createForm = document.createElement('form');
                 createForm.id = 'manageEvent';
                 createForm.method = 'POST'
-                createForm.action = '/api/events'
+                createForm.action = '/api/updateEvent'
 
                 // Container for form fields
                 const formFields = document.createElement('div');
                 formFields.className = 'formFields';
-
-                // create a hidden input for the event id
-                const eventIdInput = document.createElement('input');
-                eventIdInput.type = 'hidden';
-                eventIdInput.name = 'event_id';
-                eventIdInput.value = eventId;
-                formFields.appendChild(eventIdInput);
                 
                 // Field for event name
                 const titleField = document.createElement('input');
@@ -227,7 +219,7 @@ function initializeEdit(eventId) {
                 startTime.type = 'datetime-local';
                 // set the default value to the current time
                 let startDate = new Date(val[i].eventStart);
-                startTime.value = startDate.toISOString().split('T')[0] + 'T' +startDate.toTimeString().split(' ')[0];
+                startTime.value = startDate.toISOString().split('T')[0] + 'T' + startDate.toTimeString().split(' ')[0];
                 formFields.appendChild(startTime);
                 startTime.name = "start";
                 startTime.id = "start";
@@ -293,7 +285,7 @@ function initializeEdit(eventId) {
                 formFields.appendChild(eventIdField);
 
                 createForm.appendChild(formFields);
-        
+
                 // Container for form buttons
                 const formButtons = document.createElement('div');
                 formButtons.className = 'formButtons';
@@ -367,7 +359,7 @@ function myFunction() {
 }
 
 // Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
+window.onclick = function (event) {
     if (!event.target.matches('.dropbtn')) {
         var dropdowns = document.getElementsByClassName("dropdown-content");
         var i;
@@ -382,11 +374,11 @@ window.onclick = function(event) {
 
 initializeMain();
 
-async function getMonthData(){
+async function getMonthData() {
     let response = await fetch('/EventsData')
-    .then(response => response.json())
-    .then(data =>  {return data })
-    
+        .then(response => response.json())
+        .then(data => { return data })
+
     return response;
-    
+
 }

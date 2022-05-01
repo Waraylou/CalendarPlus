@@ -306,6 +306,12 @@ function initializeEdit(eventId) {
                     deleteButton.type = 'button';
                     deleteButton.id = 'delete';
                     deleteButton.innerText = 'Delete';
+                    // when clicked, call the /deleteEvent route
+                    deleteButton.addEventListener('click', () => {
+                        const deleteForm = document.getElementById('manageEvent');
+                        deleteForm.action = '/deleteEvent';
+                        deleteForm.submit();
+                    });
                     formButtons.appendChild(deleteButton);
 
                     // Edit button (edits event)
@@ -341,6 +347,12 @@ function initializeEdit(eventId) {
                         saveButton.type = 'button';
                         saveButton.id = 'save';
                         saveButton.innerText = 'Save';
+                        // when clicked, call the /updateEvent route
+                        saveButton.addEventListener('click', () => {
+                            const saveForm = document.getElementById('manageEvent');
+                            saveForm.action = '/updateEvent';
+                            saveForm.submit();
+                        });
                         formButtons.appendChild(saveButton);
                     });
 

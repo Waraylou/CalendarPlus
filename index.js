@@ -161,8 +161,8 @@ app.post("/api/login", (req, res) => {
 
 app.post("/updateEvent", (req, res) => {
   //need to add event title to database? Also haven't figured out the colors or events yet so not added
-  var sql = `UPDATE events SET event_title = "${req.body.title}", user_name = "${req.session.username}", eventStart "${req.body.start}", eventEnd = "${req.body.end}",
-   eventLocation = "${req.body.location}", eventDescription "${req.body.description}", reminderTime = "${req.body.start}", eventColor = "" WHERE event_id = ${req.body.event_id})`
+  var sql = `UPDATE events SET event_title = "${req.body.title}", user_name = "${req.session.username}", eventStart = "${req.body.start}", eventEnd = "${req.body.end}",
+   eventLocation = "${req.body.location}", eventDescription = "${req.body.description}", reminderTime = "${req.body.start}", eventColor = "" WHERE event_id = ${req.body.event_id}`
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Event added");
@@ -177,7 +177,7 @@ app.post("/deleteEvent", (req, res) => {
     if (err) throw err;
     console.log("Event added");
   })
-  res.redirect('/month')
+  res.redirect('back')
 });
 
 app.post('/api/logout', (req, res) => {

@@ -120,7 +120,12 @@ h2[id=monthDisplay] {
     border-radius: 10px;
     align-self: flex-start;
     width: 100%;
-    margin-top: 0.25rem;
-    margin-bottom: 0.25rem;
     font-weight: bold;
+    color: var(--clr-neutral-100);
+    opacity: 0.9;
+}
+
+.event:hover {
+    cursor: pointer;
+    opacity: 1;
 }

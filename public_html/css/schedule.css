@@ -14,19 +14,12 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    height: calc(100vh - 4rem);
 }
 
 h2[id=yearDisplay] {
     text-align: center;
     flex-basis: 70%;
-}
-
-.weekdays {
-    display: flex;
-    flex-basis: 100%;
-    flex-direction: row;
-    margin-left: 20rem;
-    height: 2rem;
 }
 
 .calendar {
@@ -36,23 +29,7 @@ h2[id=yearDisplay] {
     flex-direction: row;
     margin-left: 20rem;
     align-content: flex-start;
-}
-
-.row {
-    display: flex;
-    flex-direction: row;
-    flex-basis: 100%;
-}
-
-.day {
-    display: flex;
-    flex-direction: column;
-    flex-basis: calc((100% * (1/7)));
-    max-width: calc((100% * (1/7)));
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    border-left: 1px solid var(--clr-neutral-700); 
+    height: 100%;
 }
 
 .cell {
@@ -72,7 +49,7 @@ h2[id=yearDisplay] {
     width: 3rem;
 }
 
-.date div:hover:not(.selected) {
+.date:hover {
     background-color: var(--clr-primary-400);
     cursor: pointer;
 }
@@ -121,5 +98,15 @@ h2[id=yearDisplay] {
 }
 
 .sidebar {
-    border-right: 1px solid var(--clr-neutral-700);
+    outline: 1px solid var(--clr-neutral-700);
+}
+
+.noEvents {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 100%;
+    height: 100%;
+    color: var(--clr-neutral-300);
 }

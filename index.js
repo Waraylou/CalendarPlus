@@ -102,6 +102,10 @@ app.get('/month', redirectLogin, (req,res) =>{
 app.get('/EventsData', redirectLogin, (req, res) => {
   var sql = `SELECT * FROM events WHERE user_name = '${req.session.username}';`
   con.query(sql, function (err, result) {
+    // order by date
+    result.sort(function (a, b) {
+      return new Date(a.eventStart) - new Date(b.eventStart);
+    });
     if (err) throw err;
 
     else {

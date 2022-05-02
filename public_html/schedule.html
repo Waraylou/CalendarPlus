@@ -19,13 +19,9 @@
             </div>
             <div class="top-right">
                 <div class="dropdown">
-                    <button class="dropbtn" onclick="myFunction()">View</button>
-                    <div id="myDropdown" class="dropdown-content">
-                        <button id="day" onclick="window.location.href = 'day';">Day</button>
-                        <button id="week" onclick="window.location.href = 'week';">Week</button>
-                        <button id="month" onclick="window.location.href = 'month';">Month</button>
-                        <button id="year" onclick="window.location.href = 'year';">Year</button>
-                        <button id="schedule">Schedule</button>
+                    <button class="dropbtn" id="dropbtn">View</button>
+                    <div id="dropdown-content" class="dropdown-content">
+                        
                     </div>
                 </div>
                 <form method="post" name="logout" action="/api/logout">
@@ -41,6 +37,7 @@
         </div>
     </div>
     <script src="js/calendar-common.js"></script>
+    <script src="js/topbar.js"></script>
     <script src="js/sidebar.js"></script>
     <script src="js/schedule.js"></script>
 </body>

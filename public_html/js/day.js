@@ -6,94 +6,122 @@ const calendar = document.getElementById('calendar');
 const urlParams = new URLSearchParams(window.location.search);
 let dateParam = urlParams.get('date');
 
+const dt = new Date();
+
 if (dateParam) {
     const date = dateParam.split('-');
-    d = parseInt(date[1]);
-    m = parseInt(date[0]) - 1;
-    y = parseInt(date[2]);
+    dt.setDate(parseInt(date[1]));
+    dt.setMonth(parseInt(date[0]) - 1);
+    dt.setFullYear(parseInt(date[2]));
 }
 else {
-    // if there are no url params, load the current day
-    d = currDate.getDate();
-    m = currDate.getMonth();
-    y = currDate.getFullYear();
+    window.history.replaceState({}, '', `?date=${dt.getMonth() + 1}-${dt.getDate()}-${dt.getFullYear()}`);
 }
 
-function load(day = d, month = m, year = y) {
-    const dt = new Date();
-
-    dt.setFullYear(year);
-    dt.setMonth(month);
-    dt.setDate(day);
-
+function load(day = dt.getDate(), month = dt.getMonth(), year = dt.getFullYear()) {
     // Get the dayDisplay DOM element
     const dayDisplay = document.getElementById('dayDisplay');
-    // Set the innerText of the dayDisplay DOM element to the current month, day, and year
-    dayDisplay.innerText = `${dt.toLocaleDateString('en-us', {month: 'long'})} ${day}, ${year}`;
+    // Set the innerText of the dayDisplay DOM element to the current month, day and year
+    dayDisplay.innerText = `${dt.toLocaleDateString('en-us', {month: 'long', day: 'numeric', year: 'numeric'})}`;
 
-    // Create a DOM element that contains the weekday for the current date
-    const weekday = document.createElement('h3');
-    weekday.classList.add('weekday');
-    weekday.classList.add('cell');
-    weekday.innerText = dt.toLocaleDateString('en-us', {weekday: 'long'});
-    calendar.append(weekday);
+    let eventData = getEventsData()
+    eventData.then(val => {
+        for (let i = 0; i < val.length; i++) {
+            // convert val[0].eventStart to a date object
+            let startDate = new Date(val[i].eventStart);
 
-    // For each hour of the day, create a new DOM element called cell
-    for (let i = 0; i < 24; i++) {
-        // Create a new DOM element
-        const cell = document.createElement('div');
-        // Add the cell class to the DOM element
-        cell.classList.add('cell');
-        // Append the DOM element to the calendar DOM element
-        calendar.append(cell);
-    }
+            // convert val[0].eventEnd to a date object
+            let endDate = new Date(val[i].eventEnd);
 
-    // In each cell, create a new DOM element that contains the hour in the form AM/PM
-    for (let i = 0; i < 24; i++) {
-        const cell = calendar.children[i+1];
-        const hour = document.createElement('div');
-        hour.classList.add('hour');
-        hour.innerText = `${i % 12 === 0 ? 12 : i % 12} ${i < 12 ? 'AM' : 'PM'}`;
-        cell.append(hour);
-    }
+            // if the start date is the current day, add the event to the calendar
+            if (startDate.getDate() === day && startDate.getMonth() === month && startDate.getFullYear() === year) {
+                // create a new div for the event
+                let eventDiv = document.createElement('div');
+                eventDiv.classList.add('event');
+                eventDiv.id = val[i].event_id;
+
+                // create a new div for the date of the event
+                let dateDiv = document.createElement('div');
+                dateDiv.classList.add('date');
+                dateDiv.innerText = `${startDate.getMonth() + 1}/${startDate.getDate()}`;
+                eventDiv.append(dateDiv);
+
+                // create a new div for the abbreviated weekday of the event
+                let eventWeekday = document.createElement('div');
+                eventWeekday.classList.add('eventWeekday');
+                eventWeekday.innerText = startDate.toLocaleDateString('en-us', {weekday: 'short'});
+                eventDiv.append(eventWeekday);
+
+                // create a new div for the event start time
+                let eventStart = document.createElement('div');
+                eventStart.classList.add('eventStart');
+                eventStart.innerText = startDate.toLocaleTimeString('en-us', {hour: 'numeric', minute: 'numeric'});
+                eventDiv.append(eventStart);
+
+                // create a new div for the event end time
+                let eventEnd = document.createElement('div');
+                eventEnd.classList.add('eventEnd');
+                eventEnd.innerText = endDate.toLocaleTimeString('en-us', {hour: 'numeric', minute: 'numeric'});
+                eventDiv.append(eventEnd);
+
+                // create a new div for the event title
+                let eventTitle = document.createElement('div');
+                eventTitle.classList.add('eventTitle');
+                eventTitle.innerText = val[i].event_title;
+                eventDiv.append(eventTitle);
+
+                let eventEditButton = document.createElement('button');
+                eventEditButton.classList.add('eventEditButton');
+                eventEditButton.id = val[i].event_id;
+                eventEditButton.innerText = '\u22EE';
+                // on click, open the edit event modal
+                eventEditButton.addEventListener('click', () => {
+                    clearSidebar();
+                    initializeEdit(val[i].event_id);
+                });
+                eventDiv.append(eventEditButton);
+
+                // append the event div to the calendar
+                calendar.append(eventDiv);
+            }
+        }
+        // if the calendar has no events, display a message
+        if (calendar.childElementCount === 0) {
+            let noEvents = document.createElement('div');
+            noEvents.classList.add('noEvents');
+            noEvents.innerText = 'No events scheduled for this day.';
+            calendar.append(noEvents);
+        }
+    });
 }
 
 function initButtons() {
     document.getElementById('nextButton').addEventListener('click', () => {
         clearCalendar(calendar);
-        d += 1;
-        if (d > daysInMonth()) {
-            d = 1;
-            m += 1;
-        }
-        if (m > 11) {
-            m = 0;
-            y += 1;
-        }
+        // add one day to dt
+        dt.setDate(dt.getDate() + 1);
         // update the url without refreshing the page
-        window.history.replaceState({}, '', `?date=${m + 1}-${d}-${y}`);
+        window.history.replaceState({}, '', `?date=${dt.getMonth() + 1}-${dt.getDate()}-${dt.getFullYear()}`);
         load();
-    })
+    });
     document.getElementById('prevButton').addEventListener('click', () => {
         clearCalendar(calendar);
-        d -= 1;
-        if (d < 1) {
-            m -= 1;
-            d = daysInMonth();
-        }
-        if (m < 0) {
-            m = 11;
-            y -= 1;
-        }
+        // subtract one day from dt
+        dt.setDate(dt.getDate() - 1);
         // update the url without refreshing the page
-        window.history.replaceState({}, '', `?date=${m + 1}-${d}-${y}`);
+        window.history.replaceState({}, '', `?date=${dt.getMonth() + 1}-${dt.getDate()}-${dt.getFullYear()}`);
         load();
-    })
-}
-
-function daysInMonth() {
-    return new Date(y, m + 1, 0).getDate();
+    });
 }
 
 initButtons();
 load();
+
+async function getEventsData(){
+    let response = await fetch('/EventsData')
+    .then(response => response.json())
+    .then(data =>  {return data })
+    
+    return response;
+    
+}

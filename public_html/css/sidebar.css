@@ -61,7 +61,7 @@ button:focus, button:hover {
     background-color: var(--clr-neutral-600);
 }
 
-button[id=save] {
+button[id=save], button[id=delete], button[id=edit] {
     margin-left: 20px;
 }
 

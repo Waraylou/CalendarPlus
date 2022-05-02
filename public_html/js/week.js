@@ -108,7 +108,7 @@ function load(day = dt.getDate(), month = dt.getMonth(), year = dt.getFullYear()
 function initButtons() {
     nextButton = document.getElementById('nextButton');
     prevButton = document.getElementById('prevButton');
-    nextButton.getElementById('nextButton').addEventListener('click', () => {
+    nextButton.addEventListener('click', () => {
         clearCalendar(calendar);
         // add one week to dt
         dt.setDate(dt.getDate() + 7);
@@ -117,7 +117,7 @@ function initButtons() {
         load();
         nextButton.blur();
     });
-    prevButton.getElementById('prevButton').addEventListener('click', () => {
+    prevButton.addEventListener('click', () => {
         clearCalendar(calendar);
         // subtract one week from dt
         dt.setDate(dt.getDate() - 7);

@@ -103,7 +103,7 @@ function load(year = dt.getFullYear()) {
 function initButtons() {
     nextButton = document.getElementById('nextButton');
     prevButton = document.getElementById('prevButton');
-    nextButton.getElementById('nextButton').addEventListener('click', () => {
+    nextButton.addEventListener('click', () => {
         clearCalendar(calendar);
         // add one year to dt
         dt.setFullYear(dt.getFullYear() + 1);
@@ -111,7 +111,7 @@ function initButtons() {
         load();
         nextButton.blur();
     });
-    prevButton.getElementById('prevButton').addEventListener('click', () => {
+    prevButton.addEventListener('click', () => {
         clearCalendar(calendar);
         // subtract one year from dt
         dt.setFullYear(dt.getFullYear() - 1);

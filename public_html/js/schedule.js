@@ -101,19 +101,23 @@ function load(year = dt.getFullYear()) {
 }
 
 function initButtons() {
-    document.getElementById('nextButton').addEventListener('click', () => {
+    nextButton = document.getElementById('nextButton');
+    prevButton = document.getElementById('prevButton');
+    nextButton.getElementById('nextButton').addEventListener('click', () => {
         clearCalendar(calendar);
         // add one year to dt
         dt.setFullYear(dt.getFullYear() + 1);
         window.history.replaceState({}, '', `?date=${dt.getMonth() + 1}-${dt.getDate()}-${dt.getFullYear()}`);
         load();
+        nextButton.blur();
     });
-    document.getElementById('prevButton').addEventListener('click', () => {
+    prevButton.getElementById('prevButton').addEventListener('click', () => {
         clearCalendar(calendar);
         // subtract one year from dt
         dt.setFullYear(dt.getFullYear() - 1);
         window.history.replaceState({}, '', `?date=${dt.getMonth() + 1}-${dt.getDate()}-${dt.getFullYear()}`);
         load();
+        prevButton.blur();
     });
 }
 

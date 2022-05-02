@@ -54,6 +54,10 @@ function initializeSidebarCalendar(calendar) {
     const displayViewed = document.createElement('h3');
     displayViewed.id = 'sidebar-display-viewed';
     displayViewed.innerText = `${dt.toLocaleDateString('en-us', { month: 'long' })} ${year}`;
+    // on click, redirect to the month view of the selected month
+    displayViewed.addEventListener('click', () => {
+        window.location.href = '/month' + `?date=${dt.getMonth() + 1}-${dt.getDate()}-${dt.getFullYear()}`;
+    });
     calendar.appendChild(displayViewed);
 
     renderDaysOfWeek(calendar);
@@ -71,7 +75,7 @@ function clearSidebar() {
 }
 
 // Initializes the create sidebar
-function initializeCreate() {
+function initializeCreate(date = new Date()) {
     // Form creation
     const createForm = document.createElement('form');
     createForm.id = 'manageEvent';
@@ -100,6 +104,9 @@ function initializeCreate() {
             startTime.type = 'datetime-local';
             // set the default value to the current time, without seconds
             let startDate = new Date();
+            if (date !== new Date()) {
+                startDate = date;
+            }
             startTime.value = startDate.toISOString().split('T')[0] + 'T' + startDate.toTimeString().split(' ')[0].split(':')[0] + ':00';
             formFields.appendChild(startTime);
             startTime.name = "start";
@@ -115,6 +122,9 @@ function initializeCreate() {
             endTime.type = 'datetime-local';
             // set the default value to the current time, without seconds + 1 hour
             let endDate = new Date();
+            if (date !== new Date()) {
+                endDate = date;
+            }
             endDate.setHours(endDate.getHours() + 1);
             endTime.value = endDate.toISOString().split('T')[0] + 'T' + endDate.toTimeString().split(' ')[0].split(':')[0] + ':00';
             formFields.appendChild(endTime);

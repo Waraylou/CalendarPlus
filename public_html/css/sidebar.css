@@ -215,6 +215,10 @@ h3[id=sidebar-display-viewed] {
     margin-bottom: 0.4rem;
 }
 
+h3[id=sidebar-display-viewed]:hover {
+    cursor: pointer;
+}
+
 .sidebar-calendar .weekdays {
     margin-left: 0;
     display: flex;

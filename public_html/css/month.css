@@ -68,6 +68,23 @@ h2[id=monthDisplay] {
     padding-top: 0.5rem;
 }
 
+.cell:first-child:nth-last-child(28),
+.cell:first-child:nth-last-child(28) ~ .cell {
+    min-height: 25%;
+    max-height: 25%;
+}
+
+.cell:first-child:nth-last-child(35),
+.cell:first-child:nth-last-child(35) ~ .cell {
+    min-height: 20%;
+    max-height: 20%;
+}
+.cell:first-child:nth-last-child(42),
+.cell:first-child:nth-last-child(42) ~ .cell {
+    min-height: calc(100% * (1/6));
+    max-height: calc(100% * (1/6));
+}
+
 .date {
     height: 20px;
     width: 20px;
@@ -104,7 +121,8 @@ h2[id=monthDisplay] {
     flex-basis: 100%;
     flex-wrap: wrap;
     width: 100%;
-    max-height: 50%;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
     overflow: auto;
     padding: 0.25rem;
 }
@@ -123,6 +141,7 @@ h2[id=monthDisplay] {
     font-weight: bold;
     color: var(--clr-neutral-100);
     opacity: 0.9;
+    margin-bottom: 0.25rem;
 }
 
 .event:hover {

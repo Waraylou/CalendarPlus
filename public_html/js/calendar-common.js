@@ -62,6 +62,13 @@ function renderMonth(cell, daysInMonth, dt, month, year, renderEvents = false) {
             eventsDiv = document.createElement('div');
             eventsDiv.classList.add('events');
             eventsDiv.id = `${month + 1}-${i}-${year}`;
+            eventsDiv.addEventListener('click', (e) => {
+                // call initializeCreate() with the date as a parameter
+                // create a new date object with the date of the clicked day
+                // initializeCreate(new Date(year, month, i));
+                clearSidebar();
+                initializeCreate(new Date(year, month, i));
+            });
             daySquare.append(eventsDiv);
         }
 

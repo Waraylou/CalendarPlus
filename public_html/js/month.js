@@ -56,7 +56,7 @@ function load(month = dt.getMonth(), year = dt.getFullYear()) {
             // if the event div exists, add the event to the div
             if (document.getElementById(eventStart)) {
                 // if there is less than one child in the div, add the event
-                if (document.getElementById(eventStart).childElementCount < 1) {
+                if (document.getElementById(eventStart).childElementCount < 4) {
                     // create a div element to hold the event
                     let eventDiv = document.createElement('div');
                     eventDiv.classList.add('event');
@@ -67,10 +67,13 @@ function load(month = dt.getMonth(), year = dt.getFullYear()) {
                     // add the event div to the events div of that day
                     eventDiv.appendChild(eventTitle);
                     // on clicking the event div, call initializeEdit(val[i].event_id)
-                    eventDiv.addEventListener('click', () => {
+                    eventDiv.addEventListener('click', (e) => {
                         clearSidebar();
                         initializeEdit(val[i].event_id);
-                    })
+                        if (!e) var e = window.event;
+                        e.cancelBubble = true;
+                        if (e.stopPropagation) e.stopPropagation();
+                    });
                     document.getElementById(eventStart).appendChild(eventDiv);
                 }
             }
@@ -79,20 +82,24 @@ function load(month = dt.getMonth(), year = dt.getFullYear()) {
 }
 
 function initButtons() {
-    document.getElementById('nextButton').addEventListener('click', () => {
+    nextButton = document.getElementById('nextButton');
+    prevButton = document.getElementById('prevButton');
+    nextButton.addEventListener('click', () => {
         clearCalendar(calendar);
         // add one month to dt
         dt.setMonth(dt.getMonth() + 1);
         window.history.replaceState({}, '', `?date=${dt.getMonth() + 1}-${dt.getDate()}-${dt.getFullYear()}`);
         load();
+        nextButton.blur();
     })
-    document.getElementById('prevButton').addEventListener('click', () => {
+    prevButton.addEventListener('click', () => {
         clearCalendar(calendar);
         // subtract one month from dt
         dt.setMonth(dt.getMonth() - 1);
         // redirect the page to the previous month
         window.history.replaceState({}, '', `?date=${dt.getMonth() + 1}-${dt.getDate()}-${dt.getFullYear()}`);
         load();
+        prevButton.blur();
     })
 }
 

@@ -4,6 +4,7 @@ const dropdownContent = document.getElementById('dropdown-content');
 // When the user clicks on the button, toggle between hiding and showing the dropdown content
 dropdown.addEventListener('click', () => {
     dropdownContent.classList.toggle('show');
+    dropdown.blur();
 });
 
 // Close the dropdown if the user clicks outside of it

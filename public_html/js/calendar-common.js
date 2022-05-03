@@ -1,5 +1,4 @@
 const currDate = new Date();
-const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const weekdaysAbbr = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
 function renderDaysOfWeek(cell) {
@@ -32,6 +31,13 @@ function renderStartPadding(cell, paddingDays, lastDayPrevMonth, month, year, re
             eventsDiv = document.createElement('div');
             eventsDiv.classList.add('events');
             eventsDiv.id = `${month + 1}-${lastDayPrevMonth - i + 1}-${year}`;
+            eventsDiv.addEventListener('click', () => {
+                // call initializeCreate() with the date as a parameter
+                // create a new date object with the date of the clicked day
+                // initializeCreate(new Date(year, month, i));
+                clearSidebar();
+                initializeCreate(new Date(year, month, lastDayPrevMonth - i + 1));
+            });
             daySquare.append(eventsDiv);
         }
 
@@ -62,7 +68,7 @@ function renderMonth(cell, daysInMonth, dt, month, year, renderEvents = false) {
             eventsDiv = document.createElement('div');
             eventsDiv.classList.add('events');
             eventsDiv.id = `${month + 1}-${i}-${year}`;
-            eventsDiv.addEventListener('click', (e) => {
+            eventsDiv.addEventListener('click', () => {
                 // call initializeCreate() with the date as a parameter
                 // create a new date object with the date of the clicked day
                 // initializeCreate(new Date(year, month, i));
@@ -92,6 +98,13 @@ function renderEndPadding(cell, nextPaddingDays, month, year, renderEvents = fal
             eventsDiv = document.createElement('div');
             eventsDiv.classList.add('events');
             eventsDiv.id = `${month + 1}-${i}-${year}`;
+            eventsDiv.addEventListener('click', () => {
+                // call initializeCreate() with the date as a parameter
+                // create a new date object with the date of the clicked day
+                // initializeCreate(new Date(year, month, i));
+                clearSidebar();
+                initializeCreate(new Date(year, month, i));
+            });
             daySquare.append(eventsDiv);
         }
 
@@ -100,7 +113,7 @@ function renderEndPadding(cell, nextPaddingDays, month, year, renderEvents = fal
 }
 
 // Renders days from the next month that would be visible on the calendar for the current month
-function renderExtraPadding(cell, nextPaddingDays, renderEvents = false) {
+function renderExtraPadding(cell, nextPaddingDays) {
     for (let i = 1; i < (nextPaddingDays + 7); i++) {
         daySquare = document.createElement('div');
         daySquare.classList.add('cell');
@@ -116,4 +129,13 @@ function renderExtraPadding(cell, nextPaddingDays, renderEvents = false) {
 
 function clearCalendar(calendar) {
     calendar.innerHTML = '';
+}
+
+async function getEventsData(){
+    let response = await fetch('/EventsData')
+    .then(response => response.json())
+    .then(data =>  {return data })
+    
+    return response;
+    
 }

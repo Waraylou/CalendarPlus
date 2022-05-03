@@ -1,5 +1,3 @@
-let clicked = null;
-
 const calendar = document.getElementById('calendar');
 
 // Get the current date from the URL
@@ -33,8 +31,8 @@ function load(day = dt.getDate(), month = dt.getMonth(), year = dt.getFullYear()
             // convert val[0].eventEnd to a date object
             let endDate = new Date(val[i].eventEnd);
 
-            // if the start date is the current day, add the event to the calendar
-            if (startDate.getDate() === day && startDate.getMonth() === month && startDate.getFullYear() === year) {
+            // if the year, month and day lie between the start and end dates, add the event to the calendar
+            if (startDate.getFullYear() <= year && endDate.getFullYear() >= year && startDate.getMonth() <= month && endDate.getMonth() >= month && startDate.getDate() <= day && endDate.getDate() >= day) {
                 // create a new div for the event
                 let eventDiv = document.createElement('div');
                 eventDiv.classList.add('event');
@@ -120,12 +118,3 @@ function initButtons() {
 
 initButtons();
 load();
-
-async function getEventsData(){
-    let response = await fetch('/EventsData')
-    .then(response => response.json())
-    .then(data =>  {return data })
-    
-    return response;
-    
-}

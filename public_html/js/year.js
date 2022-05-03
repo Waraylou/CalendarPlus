@@ -1,7 +1,4 @@
-let clicked = null;
-
 const calendar = document.getElementById('calendar');
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 // Get the current date from the URL
 const urlParams = new URLSearchParams(window.location.search);
@@ -28,48 +25,40 @@ function load(year = dt.getFullYear()) {
 }
 
 function miniCalendar(dtRef, monthNum) {
-    const dtRef_ = dtRef;
 
-    dtRef_.setMonth(monthNum);
-    dtRef_.setDate(1); 
+    dtRef.setMonth(monthNum);
+    dtRef.setDate(1); 
 
-    const month = monthNum;
-    const year = dtRef_.getFullYear();
+    const year = dtRef.getFullYear();
 
-    const firstDayOfMonth = new Date(year, month, 1);
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const firstDayOfMonth = new Date(year, monthNum, 1);
+    const daysInMonth = new Date(year, monthNum + 1, 0).getDate();
 
-    const lastDayPrevMonth = new Date(year, month, 0).getDate();
-    const nextPaddingDays = 7 - new Date(year, month + 1, 0).getDay();
+    const lastDayPrevMonth = new Date(year, monthNum, 0).getDate();
+    const nextPaddingDays = 7 - new Date(year, monthNum + 1, 0).getDay();
 
-    const dateString = firstDayOfMonth.toLocaleDateString('en-us', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-    })
-    const paddingDays = weekdays.indexOf(dateString.split(', ')[0]);
+    const paddingDays = firstDayOfMonth.getDay();
 
     const monthCell = document.createElement('div');
     monthCell.classList.add('month-cell');
-    monthCell.id = `${dtRef_.toLocaleDateString('en-us', {month: 'long'})}`;
+    monthCell.id = `${dtRef.toLocaleDateString('en-us', {month: 'long'})}`;
 
     const monthName = document.createElement('h3');
     monthName.classList.add('month');
-    monthName.innerText = `${dtRef_.toLocaleDateString('en-us', {month: 'long'})}`;
+    monthName.innerText = `${dtRef.toLocaleDateString('en-us', {month: 'long'})}`;
     monthCell.append(monthName);
 
     renderDaysOfWeek(monthCell);
 
     renderStartPadding(monthCell, paddingDays, lastDayPrevMonth);
 
-    renderMonth(monthCell, daysInMonth, dtRef_, month, year);
+    renderMonth(monthCell, daysInMonth, dtRef, monthNum, year);
 
     if (monthCell.childElementCount < 38) {
         renderExtraPadding(monthCell, nextPaddingDays);
     }
     else {
-        renderEndPadding(monthCell, nextPaddingDays);
+        renderEndPadding(monthCell, nextPaddingDays, monthNum + 1, year);
     }
 
     return monthCell;

@@ -1,5 +1,3 @@
-let clicked = null;
-
 const calendar = document.getElementById('calendar');
 
 // Get the current date from the URL
@@ -25,13 +23,7 @@ function load(month = dt.getMonth(), year = dt.getFullYear()) {
     const lastDayPrevMonth = new Date(year, month, 0).getDate();
     const nextPaddingDays = 7 - new Date(year, month + 1, 0).getDay();
 
-    const dateString = firstDayOfMonth.toLocaleDateString('en-us', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-    })
-    const paddingDays = weekdays.indexOf(dateString.split(', ')[0]);
+    const paddingDays = firstDayOfMonth.getDay();
 
     document.getElementById('monthDisplay').innerText = `${dt.toLocaleDateString('en-us', {month: 'long', year: 'numeric'})}`;
 
@@ -105,12 +97,3 @@ function initButtons() {
 
 initButtons();
 load();
-
-async function getEventsData(){
-    let response = await fetch('/EventsData')
-    .then(response => response.json())
-    .then(data =>  {return data })
-    
-    return response;
-    
-}

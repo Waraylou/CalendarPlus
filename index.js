@@ -209,7 +209,7 @@ app.post("/updateEvent", (req, res) => {
     if (err) throw err;
     console.log("Event added");
   })
-  res.redirect('/month')
+  res.redirect('back')
 });
 
 app.post("/deleteEvent", (req, res) => {

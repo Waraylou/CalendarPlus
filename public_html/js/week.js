@@ -1,5 +1,3 @@
-let clicked = null;
-
 const calendar = document.getElementById('calendar');
 
 // Get the current date from the URL
@@ -130,12 +128,3 @@ function initButtons() {
 
 initButtons();
 load();
-
-async function getEventsData(){
-    let response = await fetch('/EventsData')
-    .then(response => response.json())
-    .then(data =>  {return data })
-    
-    return response;
-    
-}

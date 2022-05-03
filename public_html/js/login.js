@@ -1,5 +1,3 @@
-
-
 const main = document.getElementById('main');
 
 // Initializes the main container
@@ -22,7 +20,7 @@ function initializeLogin() {
     username.id ='username';
     username.name ='username';
     username.minLength = 8;
-    username.placeholder = 'Username or Email';
+    username.placeholder = 'Username';
     username.required = 'required';
     loginForm.appendChild(username);
 

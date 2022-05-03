@@ -1,7 +1,5 @@
 const main = document.getElementById('sidebar');
 
-let sidebarNav = 0;
-
 // Initializes the main sidebar view
 function initializeMain() {
     const mainSidebar = document.createElement('div');
@@ -28,10 +26,6 @@ function initializeMain() {
 
 function initializeSidebarCalendar(calendar) {
     const dt = new Date();
-
-    if (sidebarNav !== 0) {
-        dt.setMonth(new Date().getMonth() + sidebarNav);
-    }
 
     day = dt.getDate();
     month = dt.getMonth();
@@ -193,7 +187,7 @@ function initializeCreate(date = new Date()) {
 // Initializes the edit sidebar
 function initializeEdit(eventId) {
 
-    let eventData = getMonthData()
+    let eventData = getEventsData()
     eventData.then(val => {
         for (let i = 0; i < val.length; i++) {
             if (val[i].event_id === eventId) {
@@ -374,35 +368,4 @@ function initializeEdit(eventId) {
     });
 }
 
-/* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
-/*
-function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function (event) {
-    if (!event.target.matches('.dropbtn')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
-}
-*/
-
 initializeMain();
-
-async function getMonthData() {
-    let response = await fetch('/EventsData')
-        .then(response => response.json())
-        .then(data => { return data })
-
-    return response;
-
-}

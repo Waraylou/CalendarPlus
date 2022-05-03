@@ -1,5 +1,3 @@
-let clicked = null;
-
 const calendar = document.getElementById('calendar');
 
 // Get the current date from the URL
@@ -19,9 +17,9 @@ else {
 }
 
 function load(year = dt.getFullYear()) {
-    // Get the dayDisplay DOM element
+    // Get the yearDisplay DOM element
     const yearDisplay = document.getElementById('yearDisplay');
-    // Set the innerText of the dayDisplay DOM element to the current year
+    // Set the innerText of the yearDisplay DOM element to the current year
     yearDisplay.innerText = `${year}`;
 
     let eventData = getEventsData()
@@ -33,8 +31,8 @@ function load(year = dt.getFullYear()) {
             // convert val[0].eventEnd to a date object
             let endDate = new Date(val[i].eventEnd);
 
-            // if the start date is in the current year, add the event to the calendar
-            if (startDate.getFullYear() === year) {
+            // if the year lies between the start and end dates, add the event to the calendar
+            if (startDate.getFullYear() <= year && endDate.getFullYear() >= year) {
 
                 // create a new div for the event
                 let eventDiv = document.createElement('div');
@@ -123,11 +121,3 @@ function initButtons() {
 
 initButtons();
 load();
-
-async function getEventsData(){
-    let response = await fetch('/EventsData')
-    .then(response => response.json())
-    .then(data =>  {return data })
-    
-    return response;
-}

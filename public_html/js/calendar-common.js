@@ -135,6 +135,17 @@ async function getEventsData(){
     let response = await fetch('/EventsData')
     .then(response => response.json())
     .then(data =>  {return data })
+
+    // convert every response.startDate to the user's local time
+    for (let i = 0; i < response.length; i++) {
+        response[i].startDate = new Date(response[i].startDate);
+        response[i].startDate.setHours(response[i].startDate.getHours() - response[i].startDate.getTimezoneOffset() / 60);
+    }
+    // convert every response.endDate to the user's local time
+    for (let i = 0; i < response.length; i++) {
+        response[i].endDate = new Date(response[i].endDate);
+        response[i].endDate.setHours(response[i].endDate.getHours() - response[i].endDate.getTimezoneOffset() / 60);
+    }
     
     return response;
     

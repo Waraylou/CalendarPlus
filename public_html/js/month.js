@@ -47,8 +47,8 @@ function load(month = dt.getMonth(), year = dt.getFullYear()) {
             let eventEnd = `${endDate.getMonth() + 1}-${endDate.getDate()}-${endDate.getFullYear()}`;
             // if the event div exists, add the event to the div
             if (document.getElementById(eventStart)) {
-                // if there is less than one child in the div, add the event
-                if (document.getElementById(eventStart).childElementCount < 4) {
+                // if there is less than three children in the div, add the event
+                if (document.getElementById(eventStart).childElementCount < 3) {
                     // create a div element to hold the event
                     let eventDiv = document.createElement('div');
                     eventDiv.classList.add('event');

@@ -37,13 +37,7 @@ function initializeSidebarCalendar(calendar) {
     const lastDayPrevMonth = new Date(year, month, 0).getDate();
     const nextPaddingDays = 7 - new Date(year, month + 1, 0).getDay();
 
-    const dateString = firstDayOfMonth.toLocaleDateString('en-us', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-    })
-    const paddingDays = weekdays.indexOf(dateString.split(', ')[0]);
+    const paddingDays = firstDayOfMonth.getDay();
 
     const displayViewed = document.createElement('h3');
     displayViewed.id = 'sidebar-display-viewed';

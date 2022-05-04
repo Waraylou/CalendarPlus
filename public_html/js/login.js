@@ -65,8 +65,6 @@ function initializeLogin() {
     loginForm.appendChild(login);
     
     main.appendChild(loginForm);
-    
-    checkLoginInfo();
 }
 
 // Initializes the Registration form
@@ -154,82 +152,11 @@ function initializeRegistration() {
     registrationForm.appendChild(register);
     
     main.appendChild(registrationForm);
-
-   checkRegistrationInfo();
 }
 
 // Clears all elements from the main container
 function clearMain() {
     main.innerHTML = '';
-}
-
-// Checks if account information meets requirements
-function checkLoginInfo() {
-    const form = document.querySelector("form[name='loginForm'");
-
-    form.addEventListener("submit", function(event) {
-        // Prevents "Log In" button from submitting the form and refreshing the page
-   //     event.preventDefault();
-
-        // Gets data from the form
-        const formData = new FormData(this);
-        var userName = formData.get('username');
-        var password = formData.get('password');
-
-        // None of these if statements should be necessary, it is now taken care of through HTML attributes, 
-        // and should not "submit" the form unless all information meets the length requirements.
-        if(userName.length < 8){
-            //show error
-            console.log("ERROR: UserName Length")
-        }
-        if(password.length < 8){
-            //show error
-            console.log("ERROR: password length")
-        }
-
-        // DEBUGGING: Shows all form information upon success
-        for (const formElement of formData) {
-        console.log(formElement);
-        }
-    });
-}
-
-// Checks if account information meets requirements
-function checkRegistrationInfo() {
-    const form = document.querySelector("form[name='registrationForm'");
-
-    form.addEventListener("submit", function(event) {
-        // Prevents "Sign Up" button from submitting the form and refreshing the page
-       //event.preventDefault();
-
-        // Gets data from the form
-        const formData = new FormData(this);
-        var userName = formData.get('username');
-        var email = formData.get('email'); // Not currently used
-        var password = formData.get('password');
-        var password2 = formData.get('confpass');
-
-        // None of these if statements should be necessary, it is now taken care of through HTML attributes, 
-        // and should not "submit" the form unless all information meets the length requirements
-        // and passwords match.
-        if(userName.length < 8){
-            //show error
-            console.log("ERROR: UserName Length")
-        }
-        if(password.length < 8){
-            //show error
-            console.log("ERROR: password length")
-        }
-        if(password !== password2){
-            //show error
-            console.log("ERROR: password does not match " + password + " " + password2)
-        }
-
-        // DEBUGGING: Shows all form information upon success
-        for (const formElement of formData) {
-        console.log(formElement);
-        }
-    });
 }
 
 // Checks if the passwords match, and if not, creates a popup notification + doesn't allow the form to submit
@@ -245,9 +172,6 @@ function checkPasswordsMatch() {
         confpass.setCustomValidity('');
     }
 }
-
-
-
 
 initializeMain();
 initializeLogin();

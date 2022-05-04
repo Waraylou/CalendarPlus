@@ -1,6 +1,13 @@
 const dropdown = document.getElementById('dropbtn');
 const dropdownContent = document.getElementById('dropdown-content');
 
+function initializeDropdown() {
+    dropdown.addEventListener('click', () => {
+        dropdownContent.classList.toggle('show');
+        dropdown.blur();
+    });
+}
+
 // When the user clicks on the button, toggle between hiding and showing the dropdown content
 dropdown.addEventListener('click', () => {
     dropdownContent.classList.toggle('show');

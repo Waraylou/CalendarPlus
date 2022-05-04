@@ -26,49 +26,49 @@ Internet connection anywhere in the world.
 
 ## Repository Structure
 
-CalendarPlus
--- database
-  -- calendar.sql 
--- documentation
-  -- Calendar+ Poster.pdf
-  -- Calendar+ Poster.pptx
-  -- Project Update 1.pdf
-  -- Project Update ppt.pptx
-  -- test_document.txt
-  -- (INSERT FINAL REPORT DOCUMENT HERE)
-  -- (INSERT FINAL PRESENTATION HERE)
--- public_html
-  -- css
-    -- common.css
-    -- day.css
-    -- login.css
-    -- month.css
-    -- schedule.css
-    -- sidebar.css
-    -- topbar.css
-    -- week.css
-    -- year.css
-  -- js
-    -- calendar-common.js
-    -- day.js
-    -- login.js
-    -- month.js
-    -- schedule.js
-    -- sidebar.js
-    -- topbar.js
-    -- week.js
-    -- year.js
-  -- .DS_Store
-  -- client.js
-  -- day.html
-  -- index.html
-  -- month.html
-  -- schedule.html
-  -- week.html
-  -- worker.js
-  -- year.html
--- .DS_Store
--- .gitignore
--- README.md
--- index.js
--- package.json
+CalendarPlus  
+-- database  
+&ensp;-- calendar.sql  
+-- documentation  
+&ensp;-- Calendar+ Poster.pdf  
+&ensp;-- Calendar+ Poster.pptx  
+&ensp;-- Project Update 1.pdf  
+&ensp;-- Project Update ppt.pptx  
+&ensp;-- test_document.txt  
+&ensp;-- (INSERT FINAL REPORT DOCUMENT HERE)  
+&ensp;-- (INSERT FINAL PRESENTATION HERE)  
+-- public_html  
+&ensp;-- css  
+&ensp;&ensp;-- common.css  
+&ensp;&ensp;-- day.css  
+&ensp;&ensp;-- login.css  
+&ensp;&ensp;-- month.css  
+&ensp;&ensp;-- schedule.css  
+&ensp;&ensp;-- sidebar.css  
+&ensp;&ensp;-- topbar.css  
+&ensp;&ensp;-- week.css  
+&ensp;&ensp;-- year.css  
+&ensp;-- js  
+&ensp;&ensp;-- calendar-common.js  
+&ensp;&ensp;-- day.js  
+&ensp;&ensp;-- login.js  
+&ensp;&ensp;-- month.js  
+&ensp;&ensp;-- schedule.js  
+&ensp;&ensp;-- sidebar.js  
+&ensp;&ensp;-- topbar.js  
+&ensp;&ensp;-- week.js  
+&ensp;&ensp;-- year.js  
+&ensp;-- .DS_Store  
+&ensp;-- client.js  
+&ensp;-- day.html  
+&ensp;-- index.html  
+&ensp;-- month.html  
+&ensp;-- schedule.html  
+&ensp;-- week.html  
+&ensp;-- worker.js  
+&ensp;-- year.html  
+-- .DS_Store  
+-- .gitignore  
+-- README.md  
+-- index.js  
+-- package.json  

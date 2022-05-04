@@ -135,6 +135,8 @@ async function getEventsData(){
     let response = await fetch('/EventsData')
     .then(response => response.json())
     .then(data =>  {return data })
+
+    console.log(response);
     
     return response;
     

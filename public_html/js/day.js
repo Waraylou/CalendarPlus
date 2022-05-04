@@ -27,9 +27,13 @@ function load(day = dt.getDate(), month = dt.getMonth(), year = dt.getFullYear()
         for (let i = 0; i < val.length; i++) {
             // convert val[0].eventStart to a date object
             let startDate = new Date(val[i].eventStart);
+            // add 5 hours to the start date
+            startDate.setHours(startDate.getHours() + 5);
 
             // convert val[0].eventEnd to a date object
             let endDate = new Date(val[i].eventEnd);
+            // add 5 hours to the end date 
+            endDate.setHours(endDate.getHours() + 5);
 
             // if the year, month and day lie between the start and end dates, add the event to the calendar
             if (startDate.getFullYear() <= year && endDate.getFullYear() >= year && startDate.getMonth() <= month && endDate.getMonth() >= month && startDate.getDate() <= day && endDate.getDate() >= day) {

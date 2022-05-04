@@ -37,9 +37,13 @@ function load(day = dt.getDate(), month = dt.getMonth(), year = dt.getFullYear()
         for (let i = 0; i < val.length; i++) {
             // convert val[0].eventStart to a date object
             let startDate = new Date(val[i].eventStart);
+            // add 5 hours to the start date
+            startDate.setHours(startDate.getHours() + 5);
 
             // convert val[0].eventEnd to a date object
             let endDate = new Date(val[i].eventEnd);
+            // add 5 hours to the end date
+            endDate.setHours(endDate.getHours() + 5);
 
             // if the start date is in the current week, add the event to the calendar
             if (startDate.getFullYear() === year && startDate.getMonth() === month && startDate.getDate() >= day && startDate.getDate() <= day + 6) {

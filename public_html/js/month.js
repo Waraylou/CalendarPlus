@@ -39,10 +39,14 @@ function load(month = dt.getMonth(), year = dt.getFullYear()) {
         for (let i = 0; i < val.length; i++) {
             // convert val[0].eventStart to a date object
             let startDate = new Date(val[i].eventStart);
+            // add 5 hours to the start date
+            startDate.setHours(startDate.getHours() + 5);
             // get the day month and year from the date object
             let eventStart = `${startDate.getMonth() + 1}-${startDate.getDate()}-${startDate.getFullYear()}`;
             // convert val[0].eventEnd to a date object
             let endDate = new Date(val[i].eventEnd);
+            // add 5 hours to the end date
+            endDate.setHours(endDate.getHours() + 5);
             // get the day month and year from the date object
             let eventEnd = `${endDate.getMonth() + 1}-${endDate.getDate()}-${endDate.getFullYear()}`;
             // if the event div exists, add the event to the div

@@ -165,12 +165,20 @@ function initializeCreate(date = new Date()) {
             backButton.addEventListener('click', () => {
                 clearSidebar();
                 initializeMain();
+                // log the value of startDate
             });
             formButtons.appendChild(backButton);
             // Save button (saves event)
             const saveButton = document.createElement('button');
             saveButton.id = 'save';
             saveButton.innerText = 'Save';
+            saveButton.addEventListener('click', () => {
+                // if the title is empty, set it to 'Untitled Event'
+                if (titleField.value === '') {
+                    titleField.value = 'Untitled Event';
+                }
+                createForm.submit();
+            });
             formButtons.appendChild(saveButton);
 
         createForm.appendChild(formButtons);
@@ -217,6 +225,8 @@ function initializeEdit(eventId) {
                 startTime.type = 'datetime-local';
                 // set the default value to the current time
                 let startDate = new Date(val[i].eventStart);
+                // add 5 hours to the start date
+                startDate.setHours(startDate.getHours() + 5);
                 startTime.value = startDate.toISOString().split('T')[0] + 'T' + startDate.toTimeString().split(' ')[0];
                 formFields.appendChild(startTime);
                 startTime.name = "start";
@@ -233,6 +243,8 @@ function initializeEdit(eventId) {
                 endTime.type = 'datetime-local';
                 // set the default value to the current time, without seconds
                 let endDate = new Date(val[i].eventEnd);
+                // add 5 hours to the end date
+                endDate.setHours(endDate.getHours() + 5);
                 endTime.value = endDate.toISOString().split('T')[0] + 'T' + endDate.toTimeString().split(' ')[0];
                 formFields.appendChild(endTime);
                 endTime.name = "end";
@@ -349,6 +361,10 @@ function initializeEdit(eventId) {
                         saveButton.addEventListener('click', () => {
                             const saveForm = document.getElementById('manageEvent');
                             saveForm.action = '/updateEvent';
+                            // if the title is empty, set it to 'Untitled Event'
+                            if (titleField.value === '') {
+                                titleField.value = 'Untitled Event';
+                            }
                             saveForm.submit();
                         });
                         formButtons.appendChild(saveButton);
